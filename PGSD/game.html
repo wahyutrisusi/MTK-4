@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>🎮 Game Bilangan & Geometri Cerdas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #a4b9c5 0%, #e58fcc 50%, #754e66 100%);
+      background-attachment: fixed;
+      color: #5e466b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .fredoka {
+      font-family: "Fredoka One", cursive;
+    }
+    .cute-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 3px solid #fff;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    }
+    .sparkle {
+      animation: sparkle 2s infinite;
+    }
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+    }
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    .wrap{
+      width: 100%;
+      max-width: 920px;
+      margin: 24px auto;
+      position: relative;
+      z-index: 10;
+    }
+    .card{
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 3px solid #fff;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .logo-box{
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      width: 84px;
+      height: 84px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+      font-weight: 700;
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      font-family: "Fredoka One", cursive;
+    }
+    h1{
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle{
+      color: #6b6b6b;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    .question-text{
+      font-size: 20px;
+      margin: 12px 0 8px;
+      font-weight: 600;
+      color: #4a4a4a;
+    }
+    .opt{
+      background: linear-gradient(135deg, #ffeef8, #fff0f9);
+      border-radius: 12px;
+      padding: 14px;
+      border: 2px solid #f5d0fe;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      user-select: none;
+    }
+    .opt:hover:not(.disabled){
+      background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+      border-color: #f0abfc;
+      transform: translateX(8px);
+      box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+    }
+    .opt:active:not(.disabled){
+      transform: translateY(2px);
+    }
+    .opt.disabled{
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .feedback{
+      margin-top: 12px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .feedback.correct{
+      color: #22c55e;
+    }
+    .feedback.wrong{
+      color: #ef4444;
+    }
+    .btn{
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+    }
+    .btn:hover{
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(245, 87, 108, 0.4);
+    }
+    .btn.ghost{
+      background: transparent;
+      color: #f093fb;
+      border: 2px solid #f5d0fe;
+      box-shadow: none;
+    }
+    .btn.ghost:hover{
+      background: linear-gradient(135deg, #fef3ff, #fce7f3);
+    }
+    .btn:disabled{
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .leaderboard-table{
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    .leaderboard-table th,
+    .leaderboard-table td{
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 2px solid #fce7f3;
+    }
+    .leaderboard-table th{
+      background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+      font-weight: 700;
+      color: #831843;
+    }
+    .winner{
+      background: linear-gradient(90deg, #fff4f7, #ffeef4);
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 12px;
+      font-weight: 800;
+      border: 2px solid #fbcfe8;
+    }
+    .fraction{
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 20px;
+      margin: 0 4px;
+      line-height: 1;
+    }
+    .fraction .top{
+      border-bottom: 2px solid #000;
+      display: block;
+      padding-bottom: 2px;
+    }
+    .fraction .bottom{
+      display: block;
+      padding-top: 2px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Stars Background -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Navbar -->
+  <nav class="cute-card relative z-10 flex flex-wrap justify-between items-center px-6 sm:px-10 py-4 m-4 rounded-3xl" style="width: calc(100% - 32px); max-width: 1200px;">
+    <div class="fredoka text-2xl sm:text-3xl bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent drop-shadow-sm flex items-center gap-2">
+      <span class="sparkle">✨</span>
+      Kelompok 4
+      <span class="sparkle">✨</span>
+    </div>
+    <div class="flex flex-wrap gap-3 justify-center mt-2 sm:mt-0">
+      <a href="index.html" class="bg-gradient-to-r from-pink-400 to-purple-400 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105" style="text-decoration: none;">
+        🏠 Dashboard
+      </a>
+      <a href="bilangan.html" class="bg-gradient-to-r from-blue-400 to-cyan-400 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105" style="text-decoration: none;">
+        🔢 Bilangan
+      </a>
+      <a href="geometri.html" class="bg-gradient-to-r from-green-400 to-teal-400 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105" style="text-decoration: none;">
+        📐 Geometri
+      </a>
+      <a href="game.html" class="bg-gradient-to-r from-yellow-400 to-orange-400 text-white font-semibold px-5 py-2 rounded-full shadow-lg scale-105" style="text-decoration: none;">
+        🎮 Quiz
+      </a>
+      <a href="evaluasi.html" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105" style="text-decoration: none;">
+        ⭐ Evaluasi
+      </a>
+    </div>
+  </nav>
+
+  <!-- GAME BILANGAN -->
+  <div class="wrap" id="game-bilangan">
+    <div style="display: flex; gap: 16px; align-items: center; padding: 0 24px;">
+      <div class="logo-box">Bilangan<br/>Cerdas</div>
+      <div>
+        <h1 class="fredoka">🔢 Game Bilangan Cerdas</h1>
+        <div class="subtitle">Penjumlahan & Pengurangan Pecahan dan Desimal — Main sendiri, simpan skor, lihat pemenang</div>
+      </div>
+    </div>
+    <main id="bilangan-container" style="padding: 0 24px; margin-top: 16px;"></main>
+  </div>
+
+  <!-- GAME GEOMETRI -->
+  <div class="wrap" id="game-geometri">
+    <div style="display: flex; gap: 16px; align-items: center; padding: 0 24px;">
+      <div class="logo-box">Geometri<br/>Cerdas</div>
+      <div>
+        <h1 class="fredoka">📐 Game Geometri Cerdas</h1>
+        <div class="subtitle">Luas & Volume Tabung — Main sendiri, simpan skor, lihat pemenang</div>
+      </div>
+    </div>
+    <main id="geometri-container" style="padding: 0 24px; margin-top: 16px;"></main>
+  </div>
+
+  <footer class="cute-card text-center mt-auto py-4 rounded-3xl relative z-10" style="width: calc(100% - 32px); max-width: 1200px; margin-bottom: 16px;">
+    <p class="text-gray-600 text-sm font-semibold">
+      ✨ © 2025 Kelompok 4 | Game Edukasi Bilangan & Geometri Cerdas ✨
+    </p>
+  </footer>
+
+  <script>
+    // Create animated stars
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.width = Math.random() * 3 + 'px';
+      star.style.height = star.style.width;
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      starsContainer.appendChild(star);
+    }
+
+    // Helper fraction renderer (same style as original)
+    const f = (n,d) => `<span class="fraction"><span class="top">${n}</span><span class="bottom">${d}</span></span>`;
+
+    // createGame: reusable to render a full game inside a container
+    function createGame(containerId, questions, storageKey){
+      const container = document.getElementById(containerId);
+      container.innerHTML = `
+      <div id="${containerId}-setup" class="card">
+        <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+          <div>
+            <div style="font-size: 14px; color: #6b6b6b; margin-bottom: 8px;">Masukkan nama pemain lalu mulai kuis</div>
+            <input id="${containerId}-name" type="text" placeholder="Masukkan Nama Terlebih Dahulu" style="padding:12px; border-radius:12px; border:2px solid #f5d0fe; font-weight:600; width:260px; outline: none; transition: all 0.3s;" />
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <button id="${containerId}-start" class="btn">✨ Mulai Kuis</button>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;" title="Sound on/off">
+              <input id="${containerId}-sound" type="checkbox" checked style="width: 18px; height: 18px; accent-color: #f093fb; cursor: pointer;" /> 🔊 Suara
+            </label>
+          </div>
+        </div>
+        <div style="margin-top:16px; font-size: 14px; color: #6b6b6b;">Soal: <strong style="color: #831843;">${questions.length}</strong></div>
+      </div>
+
+      <div id="${containerId}-quiz" class="card" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+          <div>
+            <div style="font-size: 14px; color: #6b6b6b;" id="${containerId}-qCount">Soal 1 / ${questions.length}</div>
+            <div class="question-text" id="${containerId}-qText">Pertanyaan muncul di sini</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size: 14px; color: #6b6b6b;">Skor sekarang</div>
+            <div style="font-weight:900;font-size:28px;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;" id="${containerId}-currentScore">0</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;" id="${containerId}-options"></div>
+        <div class="feedback" id="${containerId}-feedback" aria-live="polite"></div>
+
+        <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:16px;flex-wrap:wrap;">
+          <div style="opacity:0.7;font-size:13px;">Pilih jawaban lalu tekan Lanjut →</div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <button id="${containerId}-next" class="btn ghost" disabled>Lanjut →</button>
+            <button id="${containerId}-quit" class="btn">Keluar</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="${containerId}-after" class="card" style="display:none">
+        <div>
+          <div style="font-size:22px;font-weight:800;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;" class="fredoka">🎉 Nilai Selesai</div>
+          <div style="margin-top:12px;font-size:16px;">Nama: <span id="${containerId}-saveName" style="font-weight:700;color:#831843;"></span></div>
+          <div style="margin-top:8px;font-size:16px;">Skor: <span id="${containerId}-finalScore" style="font-weight:900;color:#831843;"></span> dari ${questions.length}</div>
+
+          <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
+            <button id="${containerId}-saveScore" class="btn">💾 Simpan skor dan lanjutkan ke Leaderboard</button>
+            <button id="${containerId}-playAgain" class="btn ghost">🔄 Main lagi (pemain lain)</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="${containerId}-leaderboard" class="card" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+          <div>
+            <div style="font-size:22px;font-weight:800;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;" class="fredoka">🏅 Leaderboard</div>
+            <div style="font-size: 14px; color: #6b6b6b; margin-top: 4px;">Daftar skor semua pemain (disimpan di browser)</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button id="${containerId}-resetLb" class="btn ghost">🔄 Reset Leaderboard</button>
+            <button id="${containerId}-closeLb" class="btn">✖ Tutup</button>
+          </div>
+        </div>
+
+        <table class="leaderboard-table" id="${containerId}-lbTable" aria-live="polite">
+          <thead><tr><th>🏆 Nama</th><th>⭐ Skor</th><th>📅 Tanggal</th></tr></thead>
+          <tbody></tbody>
+        </table>
+
+        <div id="${containerId}-winnerBox" class="winner" style="display:none"></div>
+      </div>
+      `;
+
+      // Elements & state
+      let currentQ = 0, score = 0, player = '';
+      let lb = [];
+      const setupEl = document.getElementById(`${containerId}-setup`);
+      const quizEl = document.getElementById(`${containerId}-quiz`);
+      const afterEl = document.getElementById(`${containerId}-after`);
+      const lbEl = document.getElementById(`${containerId}-leaderboard`);
+      const nameInput = document.getElementById(`${containerId}-name`);
+      const startBtn = document.getElementById(`${containerId}-start`);
+      const soundToggle = document.getElementById(`${containerId}-sound`);
+      const qCountEl = document.getElementById(`${containerId}-qCount`);
+      const qTextEl = document.getElementById(`${containerId}-qText`);
+      const optionsEl = document.getElementById(`${containerId}-options`);
+      const feedbackEl = document.getElementById(`${containerId}-feedback`);
+      const nextBtn = document.getElementById(`${containerId}-next`);
+      const quitBtn = document.getElementById(`${containerId}-quit`);
+      const currentScoreEl = document.getElementById(`${containerId}-currentScore`);
+      const saveNameEl = document.getElementById(`${containerId}-saveName`);
+      const finalScoreEl = document.getElementById(`${containerId}-finalScore`);
+      const saveScoreBtn = document.getElementById(`${containerId}-saveScore`);
+      const playAgainBtn = document.getElementById(`${containerId}-playAgain`);
+      const lbTableBody = document.querySelector(`#${containerId}-lbTable tbody`);
+      const resetLbBtn = document.getElementById(`${containerId}-resetLb`);
+      const closeLbBtn = document.getElementById(`${containerId}-closeLb`);
+      const winnerBox = document.getElementById(`${containerId}-winnerBox`);
+
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      let audioCtx = null;
+      function playTone(freq,duration=0.12){
+        if(!soundToggle.checked) return;
+        if(!AudioCtx) return;
+        if(!audioCtx) audioCtx = new AudioCtx();
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type='sine'; o.frequency.value=freq; g.gain.value=0.02;
+        o.connect(g); g.connect(audioCtx.destination);
+        o.start();
+        g.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+duration);
+        o.stop(audioCtx.currentTime+duration+0.02);
+      }
+
+      function loadLeaderboard(){
+        try { lb = JSON.parse(localStorage.getItem(storageKey)) || []; } catch(e) { lb = []; }
+      }
+      function saveLeaderboard(){ localStorage.setItem(storageKey, JSON.stringify(lb)); }
+
+      // start
+      startBtn.addEventListener('click', ()=>{
+        const name = (nameInput.value||'').trim();
+        if(!name){ alert('Masukkan nama pemain dahulu 🥰'); nameInput.focus(); return; }
+        player = name;
+        setupEl.style.display = 'none';
+        currentQ = 0; score = 0; currentScoreEl.textContent = score; feedbackEl.textContent = '';
+        nextBtn.disabled = true; quizEl.style.display = ''; afterEl.style.display = 'none'; lbEl.style.display='none';
+        audioCtx = null;
+        renderQuestion();
+      });
+
+      function renderQuestion(){
+        const item = questions[currentQ];
+        qCountEl.textContent = `Soal ${currentQ+1} / ${questions.length}`;
+        qTextEl.innerHTML = item.q;
+        optionsEl.innerHTML = '';
+        feedbackEl.textContent = '';
+        nextBtn.disabled = true;
+        item.choices.forEach((c,i)=>{
+          const btn = document.createElement('button');
+          btn.className = 'opt'; btn.type = 'button'; btn.innerHTML = c; btn.dataset.index = i;
+          btn.addEventListener('click', onOptionClick);
+          optionsEl.appendChild(btn);
+        });
+      }
+
+      function onOptionClick(e){
+        const idx = Number(e.currentTarget.dataset.index);
+        const item = questions[currentQ];
+        Array.from(optionsEl.children).forEach(n=>n.classList.add('disabled'));
+        if(idx === item.correct){
+          feedbackEl.textContent = '🎉 Benar sekali! Kamu hebat!'; 
+          feedbackEl.className = 'feedback correct';
+          score += 1; currentScoreEl.textContent = score;
+          e.currentTarget.style.background='linear-gradient(135deg, #86efac, #4ade80)'; 
+          e.currentTarget.style.borderColor='#22c55e';
+          playTone(880,0.12);
+        } else {
+          const correctHTML = item.choices[item.correct];
+          feedbackEl.innerHTML = `💭 Kurang tepat ya~ Jawaban benar: ${correctHTML}`; 
+          feedbackEl.className = 'feedback wrong';
+          const correctBtn = Array.from(optionsEl.children).find(b=>Number(b.dataset.index)===item.correct);
+          if(correctBtn) {
+            correctBtn.style.background='linear-gradient(135deg, #86efac, #4ade80)';
+            correctBtn.style.borderColor='#22c55e';
+          }
+          e.currentTarget.style.background='linear-gradient(135deg, #fca5a5, #ef4444)';
+          e.currentTarget.style.borderColor='#ef4444';
+          playTone(220,0.18);
+        }
+        nextBtn.disabled = false;
+      }
+
+      nextBtn.addEventListener('click', ()=>{
+        currentQ += 1;
+        if(currentQ >= questions.length) endQuiz();
+        else renderQuestion();
+      });
+
+      quitBtn.addEventListener('click', ()=>{
+        if(confirm('Yakin ingin berhenti? Skor akan hilang 😢')) resetToSetup();
+      });
+
+      function endQuiz(){
+        quizEl.style.display = 'none';
+        afterEl.style.display = '';
+        saveNameEl.textContent = player;
+        finalScoreEl.textContent = `${score}`;
+      }
+
+      saveScoreBtn.addEventListener('click', ()=>{
+        loadLeaderboard();
+        lb.push({name: player, score: score, date: (new Date()).toLocaleString()});
+        lb.sort((a,b)=> b.score - a.score || new Date(b.date) - new Date(a.date));
+        saveLeaderboard();
+        showLeaderboard();
+        afterEl.style.display = 'none';
+        setupEl.style.display = '';
+        nameInput.value = '';
+      });
+
+      playAgainBtn.addEventListener('click', ()=>{
+        afterEl.style.display = 'none';
+        setupEl.style.display = '';
+        nameInput.value = '';
+        nameInput.focus();
+      });
+
+      function showLeaderboard(){
+        loadLeaderboard();
+        lbEl.style.display = '';
+        lbTableBody.innerHTML = '';
+        if(lb.length === 0){
+          lbTableBody.innerHTML = '<tr><td colspan="3">Belum ada skor tersimpan.</td></tr>';
+          winnerBox.style.display = 'none';
+          return;
+        }
+        lb.forEach(entry=>{
+          const tr = document.createElement('tr');
+          const tdName = document.createElement('td'); tdName.textContent = entry.name;
+          const tdScore = document.createElement('td'); tdScore.textContent = entry.score;
+          const tdDate = document.createElement('td'); tdDate.textContent = entry.date;
+          tr.appendChild(tdName); tr.appendChild(tdScore); tr.appendChild(tdDate);
+          lbTableBody.appendChild(tr);
+        });
+        const top = lb[0];
+        winnerBox.style.display = ''; winnerBox.innerHTML = `🏆 Pemenang: <strong>${top.name}</strong> dengan skor <strong>${top.score}</strong> / ${questions.length}!`;
+        lbEl.scrollIntoView({behavior:'smooth'});
+      }
+
+      resetLbBtn.addEventListener('click', ()=>{
+        if(confirm('Reset semua skor di leaderboard?')){ lb=[]; saveLeaderboard(); showLeaderboard(); }
+      });
+      closeLbBtn.addEventListener('click', ()=>{ lbEl.style.display='none'; });
+
+      function resetToSetup(){
+        quizEl.style.display='none'; afterEl.style.display='none'; lbEl.style.display='none'; setupEl.style.display='';
+        nameInput.value='';
+      }
+
+      nameInput.addEventListener('keydown', e=>{ if(e.key==='Enter'){ startBtn.click(); }});
+      // load initial LB
+      loadLeaderboard();
+
+      // allow pressing L (uppercase/lowercase) when focus is not on input to open leaderboard for this game
+      document.addEventListener('keydown', e=>{
+        if((e.key==='l' || e.key==='L') && document.activeElement.tagName !== 'INPUT'){
+          // show leaderboard for this game
+          showLeaderboard();
+        }
+      });
+    } // end createGame
+
+    // ---------- Soal Bilangan (dari kode awal user) ----------
+    const bilanganQuestions = [
+      { q: `${f(1,2)} + 0,25 = ?`, choices: ["0,5", "0,65", "0,75", "1,0"], correct: 2 },
+      { q: "0,4 + 0,35 = ?", choices: ["0,6", "0,7", "0,75", "0,8"], correct: 1 },
+      { q: `${f(2,3)} + ${f(1,6)} = ?`, choices: [f(3,4), f(4,6), f(5,6), "1"], correct: 2 },
+      { q: `1,2 + ${f(3,5)} = ?`, choices: ["1,6", "1,7", "1,8", "1,9"], correct: 2 },
+      { q: `${f(3,4)} + 0,5 = ?`, choices: ["1,0", "1,15", "1,2", "1,25"], correct: 3 },
+      { q: `1 - ${f(3,4)} = ?`, choices: [f(1,2), f(1,4), "0,3", "0,4"], correct: 1 },
+      { q: "0,8 - 0,45 = ?", choices: ["0,25", "0,45", "0,4", "0,21"], correct: 1 },
+      { q: `${f(5,6)} - ${f(1,3)} = ?`, choices: [f(1,2), f(3,6), f(1,4), f(4,5)], correct: 0 },
+      { q: `0,9 - ${f(2,5)} = ?`, choices: ["0,4", "0,45", "0,5", "0,55"], correct: 3 },
+      { q: `${f(7,10)} - 0,25 = ?`, choices: ["0,35", "0,4", "0,45", "0,5"], correct: 1 },
+      { q: "Ibu membeli 1,25 kg gula dan 0,75 kg tepung. Berapa berat seluruhnya?", choices: ["1,5 kg", "1,9 kg", "2 kg", "2,1 kg"], correct: 2 },
+      { q: `Siti memiliki ${f(3,4)} meter pita dan membeli lagi 0,5 meter. Berapa panjang seluruh pita Siti sekarang?`, choices: ["1 meter", "1,1 meter", "1,2 meter", "1,25 meter"], correct: 3 },
+      { q: `Panjang pita merah 2${f(1,2)} meter dan pita hijau 1${f(3,4)} meter. Berapa selisih panjang keduanya?`, choices: ["0,5 meter", "0,6 meter", "0,75 meter", "1 meter"], correct: 2 },
+      { q: "Rani menabung Rp25,5 lalu menambah Rp13,25 lagi. Berapa jumlah tabungan Rani sekarang?", choices: ["Rp37,75", "Rp38,5", "Rp38,75", "Rp39"], correct: 2 },
+      { q: "Dalam toples terdapat 2,5 kg permen. Jika dimakan 1,75 kg, berapa kilogram permen yang tersisa?", choices: ["0,5 kg", "0,65 kg", "0,7 kg", "0,75 kg"], correct: 3 }
+    ];
+
+    // ---------- Soal Geometri (dari file PDF yang Anda unggah) ----------
+    const geometriQuestions = [
+      { q: "1. Sebuah toples berbentuk tabung akan dibungkus kertas di seluruh permukaannya (termasuk alas dan tutup). Jika jari-jari 8 cm dan tinggi 15 cm, berapakah luas kertas yang diperlukan? (Gunakan π = 3,14)", choices: ["1.158 cm²", "1.158,4 cm²", "1.256 cm²", "1.300 cm²"], correct: 1 },
+      { q: "2. Diketahui sebuah tabung memiliki luas seluruh permukaan 1.570 cm² dan tingginya 20 cm. Tentukan jari-jari tabung tersebut! (Gunakan π = 3,14)", choices: ["8 cm", "9 cm", "10 cm", "11 cm"], correct: 1 },
+      { q: "3. Luas selimut sebuah tabung adalah 942 cm² dan jari-jari alasnya 7 cm. Berapa tinggi tabung tersebut? (Gunakan π = 3,14)", choices: ["18 cm", "19 cm", "20 cm", "21 cm"], correct: 2 },
+      { q: "4. Sebuah kaleng berbentuk tabung tanpa tutup memiliki jari-jari 6 cm dan tinggi 15 cm. Hitunglah luas permukaan kaleng tersebut! (Gunakan π = 3,14)", choices: ["792 cm²", "904 cm²", "943 cm²", "1.000 cm²"], correct: 1 },
+      { q: "5. Sebuah toples berbentuk tabung dengan diameter 10 cm dan tinggi 12 cm akan dilapisi kertas di seluruh permukaannya (termasuk alas dan tutup). Berapa luas kertas yang dibutuhkan? (Gunakan π = 3,14)", choices: ["628 cm²", "754 cm²", "754,4 cm²", "816 cm²"], correct: 2 },
+      { q: "6. Diketahui jari-jari sebuah tabung adalah 10 cm dan tingginya 15 cm. Hitunglah volume tabung tersebut! (Gunakan π = 3,14)", choices: ["3.940 cm³", "4.210 cm³", "4.710 cm³", "4.7100 cm³"], correct: 3 },
+      { q: "7. Sebuah tabung memiliki tinggi 14 cm dan volume 3.696 cm³. Tentukan jari-jari alas tabung tersebut! (Gunakan π = 3,14)", choices: ["7 cm", "8 cm", "9 cm", "10 cm"], correct: 1 },
+      { q: `8. Volume sebuah tabung adalah 3.960 cm³. Jika jari-jari alasnya 7 cm, berapakah tinggi tabung tersebut? (Gunakan π = ${f(22,7)})`, choices: ["20 cm", "25 cm", "30 cm", "35 cm"], correct: 0 },
+      { q: "9. Sebuah ember berbentuk tabung mampu menampung air sebanyak 6.600 cm³. Jika tinggi ember 20 cm, tentukan jari-jari ember tersebut! (Gunakan π = 3,14)", choices: ["8 cm", "9 cm", "10 cm", "12 cm"], correct: 1 },
+      { q: `10. Sebuah tabung memiliki diameter 14 cm dan tinggi 24 cm. Hitunglah volumenya! (Gunakan π = ${f(22,7)})`, choices: ["4.620 cm³", "7.392 cm³", "9.240 cm³", "10.560 cm³"], correct: 1 },
+      { q: `11. Sebuah kaleng susu berbentuk tabung memiliki jari-jari 7 cm dan tinggi 12 cm. Kaleng itu akan dilapisi stiker di seluruh permukaannya (termasuk alas dan tutup). Berapa luas stiker yang dibutuhkan? (Gunakan π = ${f(22,7)})`, choices: ["792 cm²", "836 cm²", "1.002 cm²", "1.002,4 cm²"], correct: 2 },
+      { q: "12. Sebuah drum air berbentuk tabung memiliki jari-jari 25 cm dan tinggi 80 cm. Berapa liter air yang dapat ditampung oleh drum tersebut? (Gunakan π = 3,14 dan 1.000 cm³ = 1 liter)", choices: ["100 liter", "120 liter", "150 liter", "157 liter"], correct: 3 },
+      { q: "13. Seorang pembuat kue ingin membuat kaleng untuk kue kering berbentuk tabung tanpa tutup. Jika kaleng memiliki jari-jari 10 cm dan tinggi 15 cm, tentukan luas bahan seng yang dibutuhkan untuk membuat kaleng tersebut! (Gunakan π = 3,14)", choices: ["942 cm²", "1.100 cm²", "1.414 cm²", "1.570 cm²"], correct: 2 },
+      { q: `14. Sebuah pipa air berbentuk tabung panjangnya 2 meter dengan jari-jari 7 cm. Berapa banyak air yang dapat melewati pipa itu jika terisi penuh? (Gunakan π = ${f(22,7)} dan ubah meter ke cm)`, choices: ["21.000 cm³", "30.800 cm³", "34.540 cm³", "35.000 cm³"], correct: 2 },
+      { q: `15. Sebuah toples berbentuk tabung memiliki diameter 14 cm dan tinggi 20 cm. Toples tersebut akan dicat di bagian luar kecuali tutupnya. Berapa luas permukaan yang akan dicat? (Gunakan π = ${f(22,7)})`, choices: ["1.408 cm²", "1.584 cm²", "1.760 cm²", "1.936 cm²"], correct: 2 }
+    ];
+
+    // Initialize both games
+    createGame('bilangan-container', bilanganQuestions, 'bilangan_leaderboard');
+    createGame('geometri-container', geometriQuestions, 'geometri_leaderboard');
+
+    // small UX: keyboard L will open both leaderboards sequentially (press L then choose which one)
+    // (Each game already listens for L to open its own LB when focused on page)
+  </script>
+</body>
+</html>

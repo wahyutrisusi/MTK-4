@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi & Kuis Bilangan - Kelompok 4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #ffe6f2, #fff9fb);
+      color: #5e466b;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+  
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(194, 109, 154, 0.3);
+    }
+  
+    nav {
+      background: #f7cde0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-bottom: 4px solid #f4a9d8;
+    }
+  
+    .logo {
+      font-family: 'Fredoka One', cursive;
+      font-size: 26px;
+      color: #aa336a;
+      text-shadow: 1px 1px 2px #fff;
+    }
+  
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+  
+    .nav-links a {
+      text-decoration: none;
+      color: #aa336a;
+      background: #fff;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+  
+    .nav-links a:hover {
+      background: #ffb6d1;
+      color: white;
+      transform: scale(1.05);
+    }
+  
+    h1 {
+      text-align: center;
+      font-family: 'Fredoka One', cursive;
+      font-size: 48px;
+      background: linear-gradient(90deg, #c26d9a, #b38edb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 50px 0 10px;
+    }
+  
+    h2, h3, h4 {
+      color: #aa336a;
+    }
+  
+    .materi-container, .quiz-container, .quiz-section {
+      width: 85%;
+      max-width: 900px;
+      margin: 0 auto 50px;
+      background: rgba(255,255,255,0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border: 4px dashed #f7cde0;
+    }
+  
+    .materi-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .materi-container p {
+      text-align: justify;
+      line-height: 1.7;
+    }
+  
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+  
+    .header h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 32px;
+      background: linear-gradient(90deg, #c26d9a, #b38edb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+  
+    .group-info {
+      width: 85%;
+      max-width: 900px;
+      margin: 0 auto 50px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border: 4px dashed #f7cde0;
+      box-sizing: border-box;
+    }
+  
+    .group-info h3 {
+      color: #aa336a;
+      margin-bottom: 15px;
+      font-size: 18px;
+      text-align: center;
+    }
+  
+    .group-info input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #f7cde0;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+  
+    .group-info input:focus {
+      outline: none;
+      border-color: #c26d9a;
+    }
+  
+    .section-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #c26d9a;
+      margin-bottom: 25px;
+      font-family: 'Fredoka One', cursive;
+    }
+  
+    .question {
+      background: #ffeef5;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      border: 2px solid #f7cde0;
+    }
+  
+    .question h3 {
+      color: #c26d9a;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+  
+    .fraction {
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      margin: 0 3px;
+    }
+  
+    .fraction .top {
+      display: block;
+      border-bottom: 1px solid #333;
+      line-height: 1em;
+      padding: 0 5px;
+    }
+  
+    .fraction .bottom {
+      display: block;
+      padding: 0 5px;
+      line-height: 1em;
+    }
+  
+    label {
+      display: block;
+      background: white;
+      padding: 12px;
+      border-radius: 10px;
+      margin: 8px 0;
+      border: 2px solid #f7cde0;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+  
+    label:hover {
+      background: #ffd6ea;
+      transform: translateX(5px);
+    }
+  
+    input[type="radio"] {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  
+    button, .submit-btn {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #c26d9a 0%, #e08fb3 100%);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+  
+    button:hover, .submit-btn:hover {
+      background: #ec407a;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(194, 109, 154, 0.4);
+    }
+  
+    .result {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #8e3b6d;
+      margin-top: 30px;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      border: 3px solid #c26d9a;
+      display: none;
+    }
+  
+    .result h2 {
+      color: #c26d9a;
+      font-size: 28px;
+      margin-bottom: 20px;
+      font-family: 'Fredoka One', cursive;
+    }
+  
+    .result .score {
+      font-size: 48px;
+      font-weight: bold;
+      color: #c26d9a;
+      margin: 20px 0;
+    }
+  
+    .result .group-name {
+      font-size: 20px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+  
+    .result .members {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+  
+    .result .details {
+      text-align: left;
+      background: #fff5fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  
+    .result .details p {
+      margin: 10px 0;
+      padding: 10px;
+      border-left: 4px solid #c26d9a;
+      padding-left: 15px;
+    }
+  
+    .correct {
+      color: #27ae60;
+      font-weight: 600;
+    }
+  
+    .incorrect {
+      color: #e74c3c;
+      font-weight: 600;
+    }
+  
+    .reset-btn {
+      padding: 12px 30px;
+      background: #c26d9a;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s;
+    }
+  
+    .reset-btn:hover {
+      background: #a85a82;
+      transform: scale(1.05);
+    }
+  
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 15px;
+      background-color: rgba(255,255,255,0.6);
+      border-top: 3px solid #f7cde0;
+      border-radius: 10px;
+      color: #9e6c8f;
+    }
+  
+    @media screen and (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .header h1 {
+        font-size: 24px;
+      }
+      .section-title {
+        font-size: 20px;
+      }
+      .materi-container, .quiz-container, .quiz-section, .group-info {
+        width: 95%;
+        padding: 20px;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+  <nav>
+    <div class="logo">Kelompok 4</div>
+    <div class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="bilangan.html" style="background:#ffb6d1;color:white;">Bilangan</a>
+      <a href="geometri.html">Geometri</a>
+      <a href="game.html">Quiz</a>
+      <a href="evaluasi.html">Evaluasi</a>
+    </div>
+  </nav>
+
+  <h1>BILANGAN – Penjumlahan Pecahan dan Bilangan Desimal</h1>
+
+  <div class="materi-container">
+    <h2>Tujuan Pembelajaran</h2>
+    <blockquote>Peserta didik dapat menentukan hasil penjumlahan pecahan serta bilangan desimal dalam konteks masalah nyata. (C3)</blockquote>
+    <center><img src="1bil.png" alt="1" style="width:500px; height:350px; "></center>
+    <h3>A. Materi Inti</h3>
+    <h3>1. Mengenal Pecahan</h3>
+    <p>Setiap kali kita membagi sesuatu menjadi beberapa bagian yang sama besar, setiap potong bagian disebut <strong>pecahan</strong>.<br>
+      Misalnya satu pizza dibagi menjadi 8 potong sama besar. Jika kamu mengambil satu potong, berarti kamu mengambil <span class="fraction"><span class="top">1</span><span class="bottom">8</span></span> bagian dari pizza tersebut.<br>
+      <center><img src="2bil.png" alt="1" style="width:500px; height:350px; "></center>
+      Jadi, pecahan digunakan untuk menyatakan bagian dari keseluruhan.</p><br>
+    <h4>Bagian Pecahan</h4>
+    <ul>
+      <li><strong>Pembilang</strong> → angka di atas garis pecahan, menunjukkan banyak bagian yang diambil.</li>
+      <li><strong>Penyebut</strong> → angka di bawah garis, menunjukkan jumlah seluruh bagian sama besar.</li>
+    </ul>
+    <p>Contoh: <span class="fraction"><span class="top">3</span><span class="bottom">5</span></span> dibaca "tiga per lima", artinya dari 5 bagian sama besar, diambil 3 bagian.</p>
+    <h4>Contoh dalam Kehidupan Sehari-hari</h4>
+    <ul>
+      <li>Segelas jus diminum <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> bagian, berarti setengahnya sudah habis.</li>
+      <li>Tangki air diisi <span class="fraction"><span class="top">3</span><span class="bottom">4</span></span> bagian, berarti hampir penuh.</li>
+      <li>Satu kotak kue dibagi untuk 4 orang, setiap orang mendapat <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> kotak.</li><br>
+    </ul>
+
+    <h3>2. Mengenal Bilangan Desimal</h3>
+    <p>Kadang kita tidak menulis pecahan dengan bentuk garis per, tetapi menggunakan tanda koma ( , ). Bentuk ini disebut <strong>bilangan desimal</strong>.<br>
+    Bilangan desimal merupakan cara lain menuliskan pecahan dengan penyebut 10, 100, 1000, dan seterusnya.</p>
+    <h4>Perbandingan Pecahan dan Desimal:</h4>
+    <table style="width:100%; text-align:center; border-collapse:collapse;" border="1">
+      <tr style="background:#f7cde0">
+        <th>Pecahan</th><th>Desimal</th><th>Dibaca</th><th>Contoh Kasus</th>
+      </tr>
+      <tr>
+        <td><span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> = <span class="fraction"><span class="top">5</span><span class="bottom">10</span></span></td><td>0,5</td><td>nol koma lima</td><td>Setengah liter air</td>
+      </tr>
+      <tr>
+        <td><span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> = <span class="fraction"><span class="top">25</span><span class="bottom">100</span></span></td><td>0,25</td><td>nol koma dua lima</td><td>Seperempat kilogram gula</td>
+      </tr>
+      <tr>
+        <td><span class="fraction"><span class="top">3</span><span class="bottom">4</span></span> = <span class="fraction"><span class="top">75</span><span class="bottom">100</span></span></td><td>0,75</td><td>nol koma tujuh lima</td><td>Tiga perempat meter kain</td>
+      </tr>
+    </table>
+    <p>Bilangan desimal sering muncul di timbangan, ukuran panjang, uang, dan takaran bahan masakan.</p><br>
+
+    <h3>3. Menjumlahkan Pecahan</h3>
+    <h4>a. Pecahan Berpenyebut Sama</h4>
+    <ul><li>Jika penyebutnya sama, cukup tambahkan pembilangnya.</li></ul>
+    <p><strong>Contoh:</strong> <span class="fraction"><span class="top">2</span><span class="bottom">8</span></span> + <span class="fraction"><span class="top">3</span><span class="bottom">8</span></span> = <span class="fraction"><span class="top">5</span><span class="bottom">8</span></span></p>
+    <ul><li>Karena sama-sama dibagi menjadi 8 bagian, tinggal tambahkan bagian yang 
+      diambil. .</li></ul>
+    
+    <h4>b. Pecahan Berpenyebut Berbeda</h4>
+    <p>Jika penyebutnya berbeda, perlu menyamakan penyebut terlebih dahulu.</p>
+    <ul>
+      <li>Tentukan penyebut yang sama (<strong>gunakan KPK dari penyebut</strong>).</li>
+      <li>Ubah kedua pecahan menjadi pecahan senilai dengan penyebut yang sama.</li>
+      <li>Jumlahkan pembilang.</li>
+      <li>Sederhanakan hasil jika masih bisa dibagi.</li>
+    </ul><br>
+    <p><strong>Contoh langkah penjumlahan:</strong></p>
+    <p><strong>Soal:</strong> <span class="fraction"><span class="top">1</span><span class="bottom">3</span></span> + <span class="fraction"><span class="top">1</span><span class="bottom">6</span></span></li></p>
+
+    <ul>
+      <li>Tentukan penyebut sama: 6</li>
+      <li>Ubah <span class="fraction"><span class="top">1</span><span class="bottom">3</span></span> ke penyebut 6: <span class="fraction"><span class="top">1</span><span class="bottom">3</span></span> = <span class="fraction"><span class="top">2</span><span class="bottom">6</span></span></li>
+      <li>Penjumlahan: <span class="fraction"><span class="top">2</span><span class="bottom">6</span></span> + <span class="fraction"><span class="top">1</span><span class="bottom">6</span></span> = <span class="fraction"><span class="top">3</span><span class="bottom">6</span></span></li>
+      <li>Sederhanakan hasil: <span class="fraction"><span class="top">3</span><span class="bottom">6</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span></li>
+      <li>Jadi, hasil penjumlahan <span class="fraction"><span class="top">1</span><span class="bottom">3</span></span> + <span class="fraction"><span class="top">1</span><span class="bottom">6</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> (bentuk paling sederhana)</li>
+    </ul><br>
+
+    <h3>4. Menjumlahkan Bilangan Desimal</h3>
+    <ul>
+      <li>Tulis bilangan sejajar berdasarkan posisi koma.</li>
+      <li>Tambahkan seperti penjumlahan biasa.</li>
+      <li>Letakkan koma pada posisi yang sama di hasil.</li>
+    </ul>
+    <p><strong>Contoh:</strong> 2,35 + 1,6 =</p>
+    <p><strong>Cara 1: Penjumlahan Bersusun</strong></p>
+    <center><img src="5bil.png" alt="1" style="width:250px; height:150px; "></center>
+    <p style="margin-top:-10px; margin-bottom:14px;"><em>Selalu sejajarkan koma agar hasilnya tepat!</em></p>
+    <p><strong>Cara 2: Dijajarkan dalam Baris</strong><br>
+    Tambahkan langsung seperti biasa, sambil mengingat posisi koma.<br>
+    <strong>2,35 + 1,6 = 3,95</strong></p><br>
+    <p><strong>Penjelasan Sederhana:</strong></p>
+    <ul>
+      <li>Bilangan 2 dan 1 adalah bilangan bulat → 2 + 1 = 3</li>
+      <li>Bilangan 0,35 dan 0,60 adalah bagian desimal → 0,35 + 0,60 = 0,95</li>
+      <li>Jika digabungkan, hasilnya 3,95</li>
+    </ul>
+    <p><strong>Cara 3: Ubah ke Pecahan Biasa</strong></p>
+    <ul style="margin-bottom: 0;">
+      <li>2,35 = <span class="fraction"><span class="top">235</span><span class="bottom">100</span></span></li>
+      <li>1,6 = <span class="fraction"><span class="top">16</span><span class="bottom">10</span></span> = <span class="fraction"><span class="top">160</span><span class="bottom">100</span></span></li>
+      <li>Jumlahkan: <span class="fraction"><span class="top">235</span><span class="bottom">100</span></span> + <span class="fraction"><span class="top">160</span><span class="bottom">100</span></span> = <span class="fraction"><span class="top">395</span><span class="bottom">100</span></span> = 3,95</li>
+    </ul>
+    <p style="margin-top: 8px;"><em>Kalian boleh menggunakan cara mana saja, yang penting langkahnya benar!</em></p><br>
+
+    <h3>5. Menjumlahkan Pecahan dan Bilangan Desimal</h3>
+    <p><strong>Langkah-langkah:</strong></p>
+    <ul>
+      <li>Tentukan bentuk yang ingin disamakan (pecahan → desimal).</li>
+      <li>Lakukan penjumlahan seperti biasa.</li>
+      <li>Sederhanakan hasil jika perlu.</li>
+    </ul>
+    <p><strong>Contoh Soal: Pecahan + Desimal</strong></p>
+    <p><span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> + 0,25 =</p>
+    <p><strong>Ubah pecahan ke Desimal cara 1</strong></p>
+    <p><span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> × <span class="fraction"><span class="top">5</span><span class="bottom">5</span></span> = <span class="fraction"><span class="top">5</span><span class="bottom">10</span></span> = 0,5</p>
+    <p><strong>Cara pecahan ke Desimal cara 2</strong>
+    <div style="margin: 10px 0; font-family: monospace; font-size: 16px; line-height: 1.8;">
+    <center><img src="9bil.png" alt="1" style="width:250px; height:150px; "></center>
+    </div>
+    <p style="margin-top: 5px; margin-bottom: 10px;">Karena 1 tidak bisa dibagi 2, maka 1 ditambah 0 menjadi 10 kemudian di atas ditulis 0, (nol koma)</p>
+    <p>Jadi: <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> = 0,5</p>
+    <p><strong>Maka :</strong></p>
+    <center><img src="7bil.png" alt="1" style="width:250px; height:150px; "></center>
+    <p><strong>Jadi, hasilnya adalah 0,75</strong></p><br>
+
+    <h3>6. Menjumlahkan Bilangan Desimal dan Pecahan</h3>
+    <p><strong>Langkah-langkah:</strong></p>
+    <ul>
+      <li>Tentukan bentuk yang ingin disamakan (desimal → pecahan).</li>
+      <li>Lakukan penjumlahan seperti biasa.</li>
+      <li>Sederhanakan hasil jika perlu.</li>
+    </ul>
+    <p><strong>Langkah-langkah mengubah desimal ke pecahan:</strong></p>
+    <ul>
+      <li>Lihat angka di belakang koma (menentukan penyebut):
+        <ul>
+          <li>1 angka di belakang koma → penyebutnya 10</li>
+          <li>2 angka di belakang koma → penyebutnya 100</li>
+          <li>3 angka di belakang koma → penyebutnya 1000</li>
+        </ul>
+      </li>
+      <li>Tulis bilangan tanpa koma sebagai pembilang, lalu sederhanakan.</li>
+    </ul>
+    <p><strong>Contoh konversi desimal ke pecahan:</strong></p>
+    <ul style="list-style: none; padding-left: 0;">
+      <li>0,5 = <span class="fraction"><span class="top">5</span><span class="bottom">10</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span></li>
+      <li>0,25 = <span class="fraction"><span class="top">25</span><span class="bottom">100</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span></li>
+      <li>0,125 = <span class="fraction"><span class="top">125</span><span class="bottom">1000</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">8</span></span></li>
+    </ul>
+    
+    <p><strong>Contoh 1:</strong></p>
+    <p>0,5 + <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> =</p>
+    <p><strong>Ubah desimal ke pecahan terlebih dahulu:</strong></p>
+    <p>0,5 = <span class="fraction"><span class="top">5</span><span class="bottom">10</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span></p>
+    <p><strong>Maka:</strong></p>
+    <p><span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> + <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> = <span class="fraction"><span class="top">2</span><span class="bottom">4</span></span> + <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> = <strong><span class="fraction"><span class="top">3</span><span class="bottom">4</span></span></strong></p>
+    
+    <p><strong>Contoh 2:</strong></p>
+    <p>0,40 + <span class="fraction"><span class="top">3</span><span class="bottom">10</span></span> =</p>
+    <p><strong>Ubah desimal ke pecahan terlebih dahulu:</strong></p>
+    <p>0,40 = <span class="fraction"><span class="top">40</span><span class="bottom">100</span></span> = <span class="fraction"><span class="top">2</span><span class="bottom">5</span></span></p>
+    <p><strong>Maka:</strong></p>
+    <p><span class="fraction"><span class="top">2</span><span class="bottom">5</span></span> + <span class="fraction"><span class="top">3</span><span class="bottom">10</span></span> = <span class="fraction"><span class="top">4</span><span class="bottom">10</span></span> + <span class="fraction"><span class="top">3</span><span class="bottom">10</span></span> = <strong><span class="fraction"><span class="top">7</span><span class="bottom">10</span></span></strong></p>
+    
+    <p><strong>Contoh 3:</strong></p>
+    <p>0,375 + <span class="fraction"><span class="top">1</span><span class="bottom">8</span></span> =</p>
+    <p><strong>Ubah desimal ke pecahan:</strong></p>
+    <p>0,375 = <span class="fraction"><span class="top">375</span><span class="bottom">1000</span></span> = <span class="fraction"><span class="top">3</span><span class="bottom">8</span></span></p>
+    <p><strong>Maka:</strong></p>
+    <p><span class="fraction"><span class="top">3</span><span class="bottom">8</span></span> + <span class="fraction"><span class="top">1</span><span class="bottom">8</span></span> = <span class="fraction"><span class="top">4</span><span class="bottom">8</span></span> = <strong><span class="fraction"><span class="top">1</span><span class="bottom">2</span></span></strong></p>
+  </div>
+
+<!-- Pertama -->
+
+  <div class="materi-container">
+    <h2>BILANGAN – Pengurangan Pecahan dan Bilangan Desimal</h2>
+
+    <h2>Tujuan Pembelajaran</h2>
+    <blockquote>Peserta didik dapat menentukan hasil pengurangan pecahan serta bilangan desimal dalam konteks masalah nyata. (C3)</blockquote><br>
+    <h3>Pertanyaan Pemantik:</h3>
+    <center><img src="4bil.png" alt="1" style="width:500px; height:350px; "></center>
+    <ul>
+      <li>Gelas A berisi <span class="fraction"><span class="top">3</span><span class="bottom">4</span></span> liter jus mangga.</li>
+      <li>Gelas B berisi 0,5 liter jus jeruk.</li>
+      <li>Setelah dicampur, 0,25 liter jus tumpah.</li>
+    </ul>
+    <p>"Kalau sebagian jus tumpah, bagaimana cara menghitung sisa jusnya?"</p><br>
+
+    <h3>Konsep Awal:</h3>
+    <p>Pengurangan digunakan saat ada sesuatu yang berkurang, terpakai, atau tersisa.</p>
+    
+    <h3>1. Eksplorasi Konsep: Pengurangan Pecahan</h3>
+    <p>Pecahan menunjukkan bagian dari keseluruhan, jadi saat dikurangi, kita menghitung bagian yang tersisa.</p>
+    <p><strong>Langkah-langkah Mengurangkan Pecahan:</strong></p>
+    <ul>
+      <li>Jika penyebutnya sama, kurangi pembilangnya.</li>
+      <li>Jika penyebutnya berbeda, samakan penyebut terlebih dahulu.</li>
+      <li>Sederhanakan hasil jika bisa.</li>
+    </ul>
+    
+    <p><strong>Contoh 1 (Penyebut Sama):</strong></p>
+    <p><span class="fraction"><span class="top">7</span><span class="bottom">8</span></span> – <span class="fraction"><span class="top">3</span><span class="bottom">8</span></span> = <span class="fraction"><span class="top">4</span><span class="bottom">8</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span></p>
+    <p>Karena penyebutnya sama (8), kita cukup mengurangkan pembilangnya saja.</p>
+    <p>Jika kamu punya <span class="fraction"><span class="top">7</span><span class="bottom">8</span></span> kue dan memakan <span class="fraction"><span class="top">3</span><span class="bottom">8</span></span>, maka sisa kuemu <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> bagian.</p>
+    
+    <p><strong>Contoh 2 (Penyebut Berbeda):</strong></p>
+    <p><span class="fraction"><span class="top">5</span><span class="bottom">6</span></span> – <span class="fraction"><span class="top">1</span><span class="bottom">3</span></span> = <span class="fraction"><span class="top">5</span><span class="bottom">6</span></span> – <span class="fraction"><span class="top">2</span><span class="bottom">6</span></span> = <span class="fraction"><span class="top">3</span><span class="bottom">6</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span></p>
+    <p>Karena penyebutnya berbeda (6 dan 3), kita samakan dulu penyebutnya.</p>
+    <p>Bayangkan kamu memiliki <span class="fraction"><span class="top">5</span><span class="bottom">6</span></span> liter jus, lalu diminum <span class="fraction"><span class="top">1</span><span class="bottom">3</span></span> liter. Sisa jusnya <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> liter.</p>
+    <p><strong>Tips Cepat:</strong> Gunakan KPK dari kedua penyebut untuk menyamakan penyebut.</p><br>
+
+    <h3>2. Pengurangan Bilangan Desimal</h3>
+    <p><strong>Cara 1: Bersusun Sejajar</strong></p>
+    <p><strong>Langkah:</strong></p>
+    <ul>
+      <li>Sejajarkan koma dari kedua bilangan.</li>
+      <li>Kurangkan seperti pengurangan biasa.</li>
+      <li>Letakkan koma di posisi yang sama pada hasil.</li>
+    </ul>
+    <p><strong>Contoh:</strong></p>
+    <p>4,75 – 1,25 =</p>
+    <center><img src="8bil.png" alt="1" style="width:250px; height:150px; "></center>
+    <p style="margin-top: -10px; margin-bottom: 14px;"><em>Ingat, posisi koma harus sejajar agar nilainya tidak berubah.</em></p>
+    <p><strong>Cara 2: Dijajarkan dalam Baris</strong></p>
+    <p><strong>Langkah:</strong> Kurangkan langsung dengan mengingat posisi koma.</p>
+    <p><strong>Contoh:</strong></p>
+    <p>5,5 – 2,3 = 3,2</p>
+    <p><strong>Penjelasan Sederhana:</strong></p>
+    <ul>
+      <li>Bilangan 5 dan 2 adalah bilangan bulat → 5 - 2 = 3</li>
+      <li>Bilangan 0,5 dan 0,3 adalah bagian desimal → 0,5 - 0,3 = 0,2</li>
+      <li>Jika digabungkan, hasilnya 3,2</li>
+    </ul>
+    <p>Perhatikan nilai tempat (satuan, persepuluh, perseratus).</p>
+
+    <p><strong>Cara 3: Ubah ke Pecahan Biasa</strong></p>
+    <p><strong>Contoh:</strong></p>
+    <p>0,75 – 0,25 =</p>
+    <p><strong>Langkah:</strong></p>
+    <ol>
+      <li>Ubah ke pecahan:
+        <ul>
+          <li>0,75 = <span class="fraction"><span class="top">75</span><span class="bottom">100</span></span> = <span class="fraction"><span class="top">3</span><span class="bottom">4</span></span> (sama-sama dibagi 25)</li>
+          <li>0,25 = <span class="fraction"><span class="top">25</span><span class="bottom">100</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> (sama-sama dibagi 25)</li>
+        </ul>
+      </li>
+      <li>Kurangkan pecahannya:
+        <ul>
+          <li><span class="fraction"><span class="top">3</span><span class="bottom">4</span></span> – <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> = <span class="fraction"><span class="top">2</span><span class="bottom">4</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span></li>
+        </ul>
+      </li>
+      <li>Jika mau, ubah lagi ke desimal: <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> = <span class="fraction"><span class="top">5</span><span class="bottom">10</span></span> = 0,5</li>
+    </ol>
+    <p>Cara ini menunjukkan hubungan antara desimal dan pecahan.</p><br>
+
+    <h3>3. Mengurangkan Pecahan dan Bilangan Desimal</h3>
+    <p><strong>Langkah-langkah:</strong></p>
+    <ul>
+      <li>Tentukan bentuk yang ingin disamakan (pecahan → desimal).</li>
+      <li>Lakukan pengurangan seperti biasa.</li>
+      <li>Sederhanakan hasil jika perlu.</li>
+    </ul>
+    <p><strong>Contoh 1: Pecahan – Desimal</strong></p>
+    <p><span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> – 0,25 =</p>
+    <p><strong>Ubah pecahan ke Desimal cara 1:</strong></p>
+    <p><span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> × <span class="fraction"><span class="top">5</span><span class="bottom">5</span></span> = <span class="fraction"><span class="top">5</span><span class="bottom">10</span></span> = 0,5</p>
+    <p><strong>Ubah pecahan ke Desimal cara 2:</strong></p>
+    <div style="margin: 10px 0; font-family: monospace; font-size: 16px; line-height: 1.8;">
+    <center><img src="9bil.png" alt="1" style="width:250px; height:150px; "></center>
+    </div>
+    <p style="margin-top: 5px; margin-bottom: 10px;">Karena 1 tidak bisa dibagi 2, maka 1 ditambah 0 menjadi 10 kemudian di atas ditulis 0, (nol koma)</p>
+    <p>Jadi: <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> = 0,5</p>
+    <p><strong>Maka pengurangan:</strong></p>
+    <center><img src="10bil.png" alt="1" style="width:250px; height:150px; "></center>
+    <p><strong>Jadi, hasilnya adalah 0,25</strong></p><br>
+
+    <h3>4. Mengurangkan Bilangan Desimal dan Pecahan</h3>
+    <p><strong>Langkah-langkah:</strong></p>
+    <ul>
+      <li>Tentukan bentuk yang ingin disamakan (desimal → pecahan).</li>
+      <li>Lakukan pengurangan seperti biasa.</li>
+      <li>Sederhanakan hasil jika perlu.</li>
+    </ul>
+    <p><strong>Langkah-langkah mengubah desimal ke pecahan:</strong></p>
+    <ul>
+      <li>Lihat angka di belakang koma (menentukan penyebut):
+        <ul>
+          <li>1 angka di belakang koma → penyebutnya 10</li>
+          <li>2 angka di belakang koma → penyebutnya 100</li>
+          <li>3 angka di belakang koma → penyebutnya 1000</li>
+        </ul>
+      </li>
+      <li>Tulis bilangan tanpa koma sebagai pembilang, lalu sederhanakan.</li>
+    </ul>
+    <p><strong>Contoh konversi desimal ke pecahan:</strong></p>
+    <ul style="list-style: none; padding-left: 0;">
+      <li>0,5 = <span class="fraction"><span class="top">5</span><span class="bottom">10</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span></li>
+      <li>0,25 = <span class="fraction"><span class="top">25</span><span class="bottom">100</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span></li>
+      <li>0,125 = <span class="fraction"><span class="top">125</span><span class="bottom">1000</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">8</span></span></li>
+    </ul>
+    
+    <p><strong>Contoh 1:</strong></p>
+    <p>0,5 – <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> =</p>
+    <p><strong>Ubah desimal ke pecahan terlebih dahulu:</strong></p>
+    <p>0,5 = <span class="fraction"><span class="top">5</span><span class="bottom">10</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span></p>
+    <p><strong>Maka:</strong></p>
+    <p><span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> – <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> = <span class="fraction"><span class="top">2</span><span class="bottom">4</span></span> – <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> = <strong><span class="fraction"><span class="top">1</span><span class="bottom">4</span></span></strong></p>
+    
+    <p><strong>Contoh 2:</strong></p>
+    <p>0,40 – <span class="fraction"><span class="top">3</span><span class="bottom">10</span></span> =</p>
+    <p><strong>Ubah desimal ke pecahan terlebih dahulu:</strong></p>
+    <p>0,40 = <span class="fraction"><span class="top">40</span><span class="bottom">100</span></span> = <span class="fraction"><span class="top">2</span><span class="bottom">5</span></span></p>
+    <p><strong>Maka:</strong></p>
+    <p><span class="fraction"><span class="top">2</span><span class="bottom">5</span></span> – <span class="fraction"><span class="top">3</span><span class="bottom">10</span></span> = <span class="fraction"><span class="top">4</span><span class="bottom">10</span></span> – <span class="fraction"><span class="top">3</span><span class="bottom">10</span></span> = <strong><span class="fraction"><span class="top">1</span><span class="bottom">10</span></span></strong></p>
+    
+    <p><strong>Contoh 3:</strong></p>
+    <p>0,375 – <span class="fraction"><span class="top">1</span><span class="bottom">8</span></span> =</p>
+    <p><strong>Ubah desimal ke pecahan:</strong></p>
+    <p>0,375 = <span class="fraction"><span class="top">375</span><span class="bottom">1000</span></span> = <span class="fraction"><span class="top">3</span><span class="bottom">8</span></span></p>
+    <p><strong>Maka:</strong></p>
+    <p><span class="fraction"><span class="top">3</span><span class="bottom">8</span></span> – <span class="fraction"><span class="top">1</span><span class="bottom">8</span></span> = <span class="fraction"><span class="top">2</span><span class="bottom">8</span></span> = <strong><span class="fraction"><span class="top">1</span><span class="bottom">4</span></span></strong></p>
+  </div>
+
+
+<!-- Kedua -->
+
+  <div class="materi-container">
+    <h2>Tujuan Pembelajaran</h2>
+    <blockquote>Peserta didik dapat memecahkan masalah penjumlahan dan pengurangan pecahan serta bilangan desimal dalam bentuk soal cerita. (C4)</blockquote><br>
+    <h3>Pertanyaan Pemantik</h3>
+    <ul>
+      <li>Kalau sebagian kue sudah dimakan, bagaimana menghitung sisa kue?</li>
+      <li>Jika bahan ditambah lalu sebagian digunakan, operasi apa yang harus dilakukan?</li>
+      <li>Dalam soal, kapan kita menjumlahkan dulu, kapan mengurangkan?</li>
+    </ul><br>
+    <h3>A. Strategi Pemecahan Masalah</h3>
+    <ol>
+      <li>Pahami situasi masalah.</li>
+      <li>Tentukan data yang diketahui dan yang ditanyakan.</li>
+      <li>Tentukan operasi yang sesuai (tambah atau kurang).</li>
+      <li>Pilih strategi: Bagaimana cara menghitungnya? (samakan penyebut, sejajarkan desimal)</li>
+      <li>Periksa kembali hasilnya.</li>
+    </ol><br>
+    <h3>B. Contoh Soal Cerita Pecahan dan Bilangan Desimal</h3>
+    
+    <p><strong>1. Nina membuat jus dengan <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> liter jus apel dan <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> liter jus jeruk. Setelah dicampur, ia menuangkan <span class="fraction"><span class="top">1</span><span class="bottom">3</span></span> liter jus ke gelas teman. Berapa liter jus yang tersisa?</strong></p>
+    <p><strong>Penyelesaian:</strong></p>
+    <p><strong>Langkah 1:</strong> Ubah semua ke pecahan sepenyebut</p>
+    <ul>
+      <li><span class="fraction"><span class="top">1</span><span class="bottom">2</span></span> = <span class="fraction"><span class="top">6</span><span class="bottom">12</span></span></li>
+      <li><span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> = <span class="fraction"><span class="top">3</span><span class="bottom">12</span></span></li>
+      <li><span class="fraction"><span class="top">1</span><span class="bottom">3</span></span> = <span class="fraction"><span class="top">4</span><span class="bottom">12</span></span></li>
+    </ul>
+    <p><strong>Langkah 2:</strong> Tambah jus apel dan jeruk</p>
+    <ul>
+      <li><span class="fraction"><span class="top">6</span><span class="bottom">12</span></span> + <span class="fraction"><span class="top">3</span><span class="bottom">12</span></span> = <span class="fraction"><span class="top">9</span><span class="bottom">12</span></span> = <span class="fraction"><span class="top">3</span><span class="bottom">4</span></span></li>
+    </ul>
+    <p><strong>Langkah 3:</strong> Kurangi yang dituangkan</p>
+    <ul>
+      <li><span class="fraction"><span class="top">3</span><span class="bottom">4</span></span> – <span class="fraction"><span class="top">4</span><span class="bottom">12</span></span> = <span class="fraction"><span class="top">9</span><span class="bottom">12</span></span> – <span class="fraction"><span class="top">4</span><span class="bottom">12</span></span> = <span class="fraction"><span class="top">5</span><span class="bottom">12</span></span></li>
+    </ul>
+    <p><strong>Jawaban:</strong> <span class="fraction"><span class="top">5</span><span class="bottom">12</span></span> liter</p>
+    <p>Jadi, jus yang tersisa sebanyak <span class="fraction"><span class="top">5</span><span class="bottom">12</span></span> liter.</p><br>
+    
+    <p><strong>2. Belanja Bahan Masakan</strong></p>
+    <p>Andi membeli <span class="fraction"><span class="top">2</span><span class="bottom">3</span></span> kg gula dan <span class="fraction"><span class="top">1</span><span class="bottom">3</span></span> kg tepung. Setelah digunakan, tersisa <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> kg gula dan <span class="fraction"><span class="top">1</span><span class="bottom">6</span></span> kg tepung. Berapa total bahan yang tersisa?</p>
+    <p><strong>Penyelesaian:</strong></p>
+    <ul>
+      <li><strong>Sisa gula:</strong> <span class="fraction"><span class="top">2</span><span class="bottom">3</span></span> – <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> = <span class="fraction"><span class="top">8</span><span class="bottom">12</span></span> – <span class="fraction"><span class="top">3</span><span class="bottom">12</span></span> = <span class="fraction"><span class="top">5</span><span class="bottom">12</span></span> kg</li>
+      <li><strong>Sisa tepung:</strong> <span class="fraction"><span class="top">1</span><span class="bottom">3</span></span> – <span class="fraction"><span class="top">1</span><span class="bottom">6</span></span> = <span class="fraction"><span class="top">2</span><span class="bottom">6</span></span> – <span class="fraction"><span class="top">1</span><span class="bottom">6</span></span> = <span class="fraction"><span class="top">1</span><span class="bottom">6</span></span> kg</li>
+      <li><strong>Total sisa:</strong> <span class="fraction"><span class="top">5</span><span class="bottom">12</span></span> + <span class="fraction"><span class="top">1</span><span class="bottom">6</span></span> = <span class="fraction"><span class="top">5</span><span class="bottom">12</span></span> + <span class="fraction"><span class="top">2</span><span class="bottom">12</span></span> = <span class="fraction"><span class="top">7</span><span class="bottom">12</span></span> kg</li>
+    </ul>
+    <p>Jadi, total bahan yang tersisa <span class="fraction"><span class="top">7</span><span class="bottom">12</span></span> kg.</p><br>
+    
+    <p><strong>3. Ibu membeli 2,5 kg tepung dan menambah 1,5 kg lagi. Kemudian digunakan 1,75 kg untuk membuat kue. Berapa kg tepung yang tersisa?</strong></p>
+    <p><strong>Penyelesaian:</strong></p>
+    <p>4,0 (Jumlah tepung awal)</p>
+    <center><img src="11bil.png" alt="1" style="width:250px; height:150px; "></center>
+    <p>Jadi, sisa tepung 2,25 kg.</p><br>
+    
+    <p><strong>4. Siswa mengumpulkan 0,7 karung botol pada hari pertama dan 0,5 karung pada hari kedua. Setelah diperiksa, 0,3 karung rusak. Berapa karung botol yang masih bisa digunakan?</strong></p>
+    <p><strong>Penyelesaian:</strong></p>
+    <p>Jumlah awal: 0,7 + 0,5 = 1,2 karung</p>
+    <p>Kurangi rusak: 1,2 - 0,3 = 0,9 karung</p>
+    <center><img src="12.png" alt="1" style="width:250px; height:150px; "></center>
+    <p>Jadi, ada 0,9 karung botol yang bisa digunakan.</p>
+  </div>
+
+  <div class="materi-container">
+    <h2>Petunjuk Pengerjaan</h2>
+    <ul>
+      <li>Bacalah setiap soal dengan cermat.</li>
+      <li>Gunakan cara yang menurutmu paling mudah dipahami.</li>
+      <li>Tulis langkah-langkah perhitunganmu dengan rapi.</li>
+      <li>Jawablah dengan satuan yang tepat.</li>
+    </ul>
+  </div>
+
+<!-- Ketiga -->
+<div id="quiz-main">
+  <div class="group-info">
+    <h3>Informasi Kelompok</h3>
+    <input type="text" id="nama-kelompok" placeholder="Masukkan nama kelompok">
+    <input type="text" id="anggota-1" placeholder="Anggota 1">
+    <input type="text" id="anggota-2" placeholder="Anggota 2">
+    <input type="text" id="anggota-3" placeholder="Anggota 3">
+    <input type="text" id="anggota-4" placeholder="Anggota 4">
+    <input type="text" id="anggota-5" placeholder="Anggota 5">
+  </div>
+
+  <!-- LKPD 1: Penjumlahan -->
+  <div class="quiz-section">
+    <div class="section-title">LKPD 1 - Penjumlahan Pecahan dan Bilangan Desimal</div>
+    
+    <div class="question">
+      <h3>1. <span class="fraction"><span class="top">5</span><span class="bottom">20</span></span> + <span class="fraction"><span class="top">15</span><span class="bottom">20</span></span> =</h3>
+      <label><input type="radio" name="q1" value="a"> a. 1</label>
+      <label><input type="radio" name="q1" value="b"> b. <span class="fraction"><span class="top">5</span><span class="bottom">10</span></span></label>
+      <label><input type="radio" name="q1" value="c"> c. <span class="fraction"><span class="top">20</span><span class="bottom">20</span></span></label>
+      <label><input type="radio" name="q1" value="d"> d. 2</label>
+    </div>
+
+    <div class="question">
+      <h3>2. <span class="fraction"><span class="top">18</span><span class="bottom">25</span></span> + <span class="fraction"><span class="top">6</span><span class="bottom">50</span></span> =</h3>
+      <label><input type="radio" name="q2" value="a"> a. <span class="fraction"><span class="top">30</span><span class="bottom">25</span></span></label>
+      <label><input type="radio" name="q2" value="b"> b. <span class="fraction"><span class="top">28</span><span class="bottom">25</span></span></label>
+      <label><input type="radio" name="q2" value="c"> c. <span class="fraction"><span class="top">21</span><span class="bottom">25</span></span></label>
+      <label><input type="radio" name="q2" value="d"> d. <span class="fraction"><span class="top">23</span><span class="bottom">25</span></span></label>
+    </div>
+
+    <div class="question">
+      <h3>3. Perhatikan gambar timbangan pisang!</h3>
+      <center><img src="3bil.png" alt="1" style="width:300px; height:200px; "></center>
+      <h3> Hitung berat total pisang tersebut!</h3>
+      <label><input type="radio" name="q3" value="a"> a. 8,78</label>
+      <label><input type="radio" name="q3" value="b"> b. 6,90</label>
+      <label><input type="radio" name="q3" value="c"> c. 7,78</label>
+      <label><input type="radio" name="q3" value="d"> d. 7,88</label>
+    </div>
+
+    <div class="question">
+      <h3>4. <span class="fraction"><span class="top">3</span><span class="bottom">4</span></span> + 0,25 =</h3>
+      <label><input type="radio" name="q4" value="a"> a. 0,10</label>
+      <label><input type="radio" name="q4" value="b"> b. 0,01</label>
+      <label><input type="radio" name="q4" value="c"> c. 1,10</label>
+      <label><input type="radio" name="q4" value="d"> d. 1</label>
+    </div>
+
+    <div class="question">
+      <h3>5. 0,80 + <span class="fraction"><span class="top">2</span><span class="bottom">5</span></span> =</h3>
+      <label><input type="radio" name="q5" value="a"> a. <span class="fraction"><span class="top">4</span><span class="bottom">5</span></span></label>
+      <label><input type="radio" name="q5" value="b"> b. <span class="fraction"><span class="top">6</span><span class="bottom">5</span></span></label>
+      <label><input type="radio" name="q5" value="c"> c. <span class="fraction"><span class="top">8</span><span class="bottom">5</span></span></label>
+      <label><input type="radio" name="q5" value="d"> d. <span class="fraction"><span class="top">7</span><span class="bottom">5</span></span></label>
+    </div>
+  </div>
+
+  <!-- LKPD 2: Pengurangan -->
+  <div class="quiz-section">
+    <div class="section-title">LKPD 2 - Pengurangan Pecahan dan Bilangan Desimal</div>
+    
+    <div class="question">
+      <h3>1. <span class="fraction"><span class="top">9</span><span class="bottom">12</span></span> – <span class="fraction"><span class="top">4</span><span class="bottom">12</span></span> =</h3>
+      <label><input type="radio" name="q6" value="a"> a. <span class="fraction"><span class="top">5</span><span class="bottom">6</span></span></label>
+      <label><input type="radio" name="q6" value="b"> b. <span class="fraction"><span class="top">9</span><span class="bottom">10</span></span></label>
+      <label><input type="radio" name="q6" value="c"> c. <span class="fraction"><span class="top">7</span><span class="bottom">12</span></span></label>
+      <label><input type="radio" name="q6" value="d"> d. <span class="fraction"><span class="top">5</span><span class="bottom">12</span></span></label>
+    </div>
+
+    <div class="question">
+      <h3>2. <span class="fraction"><span class="top">7</span><span class="bottom">8</span></span> – <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> =</h3>
+      <label><input type="radio" name="q7" value="a"> a. <span class="fraction"><span class="top">5</span><span class="bottom">8</span></span></label>
+      <label><input type="radio" name="q7" value="b"> b. <span class="fraction"><span class="top">7</span><span class="bottom">8</span></span></label>
+      <label><input type="radio" name="q7" value="c"> c. <span class="fraction"><span class="top">5</span><span class="bottom">4</span></span></label>
+      <label><input type="radio" name="q7" value="d"> d. <span class="fraction"><span class="top">2</span><span class="bottom">8</span></span></label>
+    </div>
+
+    <div class="question">
+      <h3>3. 2,65 – 1,4 =</h3>
+      <label><input type="radio" name="q8" value="a"> a. 1,52</label>
+      <label><input type="radio" name="q8" value="b"> b. 1,25</label>
+      <label><input type="radio" name="q8" value="c"> c. 2,25</label>
+      <label><input type="radio" name="q8" value="d"> d. 1,32</label>
+    </div>
+
+    <div class="question">
+      <h3>4. 0,75 – <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> =</h3>
+      <label><input type="radio" name="q9" value="a"> a. <span class="fraction"><span class="top">2</span><span class="bottom">4</span></span></label>
+      <label><input type="radio" name="q9" value="b"> b. <span class="fraction"><span class="top">3</span><span class="bottom">4</span></span></label>
+      <label><input type="radio" name="q9" value="c"> c. <span class="fraction"><span class="top">1</span><span class="bottom">2</span></span></label>
+      <label><input type="radio" name="q9" value="d"> d. <span class="fraction"><span class="top">3</span><span class="bottom">2</span></span></label>
+    </div>
+
+    <div class="question">
+      <h3>5. <span class="fraction"><span class="top">3</span><span class="bottom">4</span></span> – 0,2 =</h3>
+      <label><input type="radio" name="q10" value="a"> a. 0,55</label>
+      <label><input type="radio" name="q10" value="b"> b. 0,43</label>
+      <label><input type="radio" name="q10" value="c"> c. 1,55</label>
+      <label><input type="radio" name="q10" value="d"> d. 0,20</label>
+    </div>
+  </div>
+
+  <!-- LKPD 3: Soal Cerita -->
+  <div class="quiz-section">
+    <div class="section-title">LKPD 3 - Soal Cerita Penjumlahan & Pengurangan</div>
+    
+    <div class="question">
+      <h3>1. Dito bersepeda 0,5 km ke taman, lalu berkeliling <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span> km. Ia kembali ke rumah melalui jalan lain sejauh 4 km. Berapa total jarak yang sudah ditempuh?</h3>
+      <label><input type="radio" name="q11" value="a"> a. 4,02 km</label>
+      <label><input type="radio" name="q11" value="b"> b. 6,75 km</label>
+      <label><input type="radio" name="q11" value="c"> c. 4,75 km</label>
+      <label><input type="radio" name="q11" value="d"> d. 0,75 km</label>
+    </div>
+
+    <div class="question">
+      <h3>2. Kolam diisi air <span class="fraction"><span class="top">3</span><span class="bottom">4</span></span> m³, ditambah 0,5 m³ dari selang tambahan. Jadi berapa jumlah air yang ada dikolam?</h3>
+      <label><input type="radio" name="q12" value="a"> a. 1,25 m³</label>
+      <label><input type="radio" name="q12" value="b"> b. 1,05 m³</label>
+      <label><input type="radio" name="q12" value="c"> c. 2,25 m³</label>
+      <label><input type="radio" name="q12" value="d"> d. 1,29 m³</label>
+    </div>
+
+    <div class="question">
+      <h3>3. Gudang memiliki 0,7 L cat merah dan 0,6 L cat biru. Jika digunakan <span class="fraction"><span class="top">9</span><span class="bottom">10</span></span> L untuk proyek mural, berapa liter cat yang tersisa?</h3>
+      <label><input type="radio" name="q13" value="a"> a. 0,4 L</label>
+      <label><input type="radio" name="q13" value="b"> b. 0,25 L</label>
+      <label><input type="radio" name="q13" value="c"> c. 1,2 L</label>
+      <label><input type="radio" name="q13" value="d"> d. 0,8 L</label>
+    </div>
+
+    <div class="question">
+      <h3>4. Sebuah tim menyelesaikan <span class="fraction"><span class="top">2</span><span class="bottom">3</span></span> proyek pada minggu pertama dan 0,25 proyek pada minggu kedua. Setelah evaluasi, ternyata harus diulang <span class="fraction"><span class="top">1</span><span class="bottom">5</span></span> proyek. Berapa proyek yang sudah benar-benar selesai?</h3>
+      <label><input type="radio" name="q14" value="a"> a. <span class="fraction"><span class="top">43</span><span class="bottom">90</span></span></label>
+      <label><input type="radio" name="q14" value="b"> b. <span class="fraction"><span class="top">33</span><span class="bottom">30</span></span></label>
+      <label><input type="radio" name="q14" value="c"> c. <span class="fraction"><span class="top">44</span><span class="bottom">60</span></span></label>
+      <label><input type="radio" name="q14" value="d"> d. <span class="fraction"><span class="top">43</span><span class="bottom">60</span></span></label>
+    </div>
+
+    <div class="question">
+      <h3>5. Kelompok mengumpulkan <span class="fraction"><span class="top">3</span><span class="bottom">4</span></span> kg bahan kimia dan menambah 0,6 kg lagi. Jika digunakan 0,4 kg untuk eksperimen, berapa kg bahan kimia yang tersisa?</h3>
+      <label><input type="radio" name="q15" value="a"> a. <span class="fraction"><span class="top">19</span><span class="bottom">50</span></span></label>
+      <label><input type="radio" name="q15" value="b"> b. <span class="fraction"><span class="top">9</span><span class="bottom">20</span></span></label>
+      <label><input type="radio" name="q15" value="c"> c. <span class="fraction"><span class="top">19</span><span class="bottom">20</span></span></label>
+      <label><input type="radio" name="q15" value="d"> d. <span class="fraction"><span class="top">29</span><span class="bottom">40</span></span></label>
+    </div>
+  </div>
+
+  <button class="submit-btn" onclick="checkAllAnswers()">Cek Semua Jawaban</button>
+</div>
+
+<div class="result" id="result-section">
+  <h2>🎉 Hasil Quiz</h2>
+  <div class="group-name" id="result-group"></div>
+  <div class="members" id="result-members"></div>
+  <div class="score" id="score"></div>
+  <div class="details" id="details"></div>
+  <button class="reset-btn" onclick="resetQuiz()">Kerjakan Lagi</button>
+</div>
+
+<footer>© 2025 Kelompok 4 | Kelas C2023 - Universitas PGRI Kanjuruhan Malang</footer>
+</div>
+
+<script>
+const correctAnswers = {
+  // LKPD 1: Penjumlahan
+  q1: 'a',  // 5/20 + 15/20 = 20/20 = 1
+  q2: 'c',  // 18/25 + 6/50 = 21/25
+  q3: 'c',  // 7,78
+  q4: 'd',  // 3/4 + 0,25 = 1
+  q5: 'b',  // 0,80 + 2/5 = 6/5
+  
+  // LKPD 2: Pengurangan
+  q6: 'd',  // 9/12 - 4/12 = 5/12
+  q7: 'a',  // 7/8 - 1/4 = 5/8
+  q8: 'b',  // 2,65 - 1,4 = 1,25
+  q9: 'c',  // 0,75 - 1/4 = 1/2
+  q10: 'a', // 3/4 - 0,2 = 0,55
+  
+  // LKPD 3: Soal Cerita
+  q11: 'c', // 0,5 + 1/4 + 4 = 4,75 km
+  q12: 'a', // 3/4 + 0,5 = 1,25 m³
+  q13: 'd', // (0,7 + 0,6) - 9/10 = 0,4 L (KOREKSI: seharusnya 0,4)
+  q14: 'd', // (2/3 + 0,25) - 1/5 = 43/60
+  q15: 'c'  // (3/4 + 0,6) - 0,4 = 19/20
+};
+
+const questionText = {
+  q1: 'Soal 1: <span class="fraction"><span class="top">5</span><span class="bottom">20</span></span> + <span class="fraction"><span class="top">15</span><span class="bottom">20</span></span>',
+  q2: 'Soal 2: <span class="fraction"><span class="top">18</span><span class="bottom">25</span></span> + <span class="fraction"><span class="top">6</span><span class="bottom">50</span></span>',
+  q3: 'Soal 3: Berat total pisang',
+  q4: 'Soal 4: <span class="fraction"><span class="top">3</span><span class="bottom">4</span></span> + 0,25',
+  q5: 'Soal 5: 0,80 + <span class="fraction"><span class="top">2</span><span class="bottom">5</span></span>',
+  q6: 'Soal 1: <span class="fraction"><span class="top">9</span><span class="bottom">12</span></span> - <span class="fraction"><span class="top">4</span><span class="bottom">12</span></span>',
+  q7: 'Soal 2: <span class="fraction"><span class="top">7</span><span class="bottom">8</span></span> - <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span>',
+  q8: 'Soal 3: 2,65 - 1,4',
+  q9: 'Soal 4: 0,75 - <span class="fraction"><span class="top">1</span><span class="bottom">4</span></span>',
+  q10: 'Soal 5: <span class="fraction"><span class="top">3</span><span class="bottom">4</span></span> - 0,2',
+  q11: 'Soal 1: Jarak bersepeda Dito',
+  q12: 'Soal 2: Air di kolam',
+  q13: 'Soal 3: Sisa cat',
+  q14: 'Soal 4: Proyek tim',
+  q15: 'Soal 5: Bahan kimia'
+};
+
+function checkAllAnswers() {
+  const groupName = document.getElementById('nama-kelompok').value.trim();
+  
+  if (!groupName) {
+    alert('⚠️ Mohon isi nama kelompok terlebih dahulu!');
+    return;
+  }
+
+  let allAnswered = true;
+  for (let i = 1; i <= 15; i++) {
+    const answer = document.querySelector(`input[name="q${i}"]:checked`);
+    if (!answer) {
+      allAnswered = false;
+      break;
+    }
+  }
+
+  if (!allAnswered) {
+    alert('⚠️ Mohon jawab semua soal terlebih dahulu!');
+    return;
+  }
+
+  // Ambil nama anggota kelompok
+  const members = [];
+  for (let i = 1; i <= 5; i++) {
+    const member = document.getElementById(`anggota-${i}`).value.trim();
+    if (member) {
+      members.push(member);
+    }
+  }
+
+  let score = 0;
+  let details = '';
+  const totalQuestions = 15;
+  const pointPerQuestion = 100 / totalQuestions;
+
+  for (let i = 1; i <= totalQuestions; i++) {
+    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+    const isCorrect = selected && selected.value === correctAnswers[`q${i}`];
+    
+    if (isCorrect) {
+      score += pointPerQuestion;
+      details += `<p class="correct">✓ ${questionText[`q${i}`]}: <strong>BENAR</strong></p>`;
+    } else {
+      details += `<p class="incorrect">✗ ${questionText[`q${i}`]}: <strong>SALAH</strong></p>`;
+    }
+  }
+
+  document.getElementById('result-group').innerHTML = `<strong>Nama Kelompok:</strong> ${groupName}`;
+  
+  if (members.length > 0) {
+    document.getElementById('result-members').innerHTML = `<strong>Anggota:</strong><br>${members.join('<br>')}`;
+  } else {
+    document.getElementById('result-members').innerHTML = '';
+  }
+  
+  document.getElementById('score').textContent = `${Math.round(score)} / 100`;
+  document.getElementById('details').innerHTML = details;
+
+  document.getElementById('quiz-main').style.display = 'none';
+  document.getElementById('result-section').style.display = 'block';
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetQuiz() {
+  document.getElementById('quiz-main').style.display = 'block';
+  document.getElementById('result-section').style.display = 'none';
+  
+  const radios = document.querySelectorAll('input[type="radio"]');
+  radios.forEach(radio => radio.checked = false);
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
