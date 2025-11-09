@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Matematika - Kelompok 4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #a4b9c5 0%, #e58fcc 50%, #754e66 100%);
+      background-attachment: fixed;
+      color: #5e466b;
+      min-height: 100vh;
+    }
+    .fredoka {
+      font-family: "Fredoka One", cursive;
+    }
+    .cute-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 3px solid #fff;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    }
+    .sparkle {
+      animation: sparkle 2s infinite;
+    }
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+    }
+    .float {
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    .btn-cute {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .btn-cute:hover {
+      transform: scale(1.1) rotate(-2deg);
+    }
+    .btn-cute::before {
+      content: '✨';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      font-size: 20px;
+      opacity: 0;
+      transition: all 0.3s;
+    }
+    .btn-cute:hover::before {
+      top: 10px;
+      opacity: 1;
+    }
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    .foto {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #f7cde0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.4s ease;
+      animation: floaty 5s ease-in-out infinite;
+    }
+    .foto:hover {
+      transform: scale(1.08);
+    }
+    @keyframes floaty {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+    .foto-label {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #c26d9a;
+      background-color: #ffeef5;
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+  <!-- Animated Stars Background -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Navbar -->
+  <nav class="cute-card relative z-10 flex flex-wrap justify-between items-center px-6 sm:px-10 py-4 m-4 rounded-3xl">
+    <div class="fredoka text-2xl sm:text-3xl bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent drop-shadow-sm flex items-center gap-2">
+      <span class="sparkle">✨</span>
+      Kelompok 4
+      <span class="sparkle">✨</span>
+    </div>
+    <div class="flex flex-wrap gap-3 justify-center mt-2 sm:mt-0">
+      <a href="index.html" class="bg-gradient-to-r from-pink-400 to-purple-400 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105">
+        🏠 Dashboard
+      </a>
+      <a href="bilangan.html" class="bg-gradient-to-r from-blue-400 to-cyan-400 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105">
+        🔢 Bilangan
+      </a>
+      <a href="geometri.html" class="bg-gradient-to-r from-green-400 to-teal-400 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105">
+        📐 Geometri
+      </a>
+      <a href="game.html" class="bg-gradient-to-r from-yellow-400 to-orange-400 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105">
+        🎮 Quiz
+      </a>
+      <a href="evaluasi.html" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105">
+        ⭐ Evaluasi
+      </a>
+    </div>
+  </nav>
+
+  <!-- Judul -->
+  <div class="text-center mt-8 relative z-10">
+    <div class="float inline-block">
+      <h1 class="fredoka text-5xl sm:text-6xl mb-2 text-white drop-shadow-lg">
+        🏠 Dashboard Matematika
+      </h1>
+    </div>
+    <h2 class="text-white text-xl mb-4 font-semibold drop-shadow-md">
+      💖 Kelas 6 SD | Tema: Bilangan & Geometri 💖
+    </h2>
+  </div>
+
+  <!-- Konten Utama -->
+  <div class="cute-card rounded-3xl shadow-2xl w-[90%] max-w-4xl mx-auto mt-6 mb-10 p-8 relative z-10">
+    <div class="text-center mb-8">
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Selamat datang di <span class="font-bold text-purple-600">Web Pembelajaran Matematika Interaktif</span> dari <strong>Kelompok 4</strong>!  
+        Di sini kamu akan mempelajari konsep <strong>bilangan</strong> dan <strong>geometri</strong> melalui materi yang menarik, latihan seru, dan permainan edukatif yang menyenangkan.  
+        <br><br>
+        Dengan semangat belajar dan rasa ingin tahu yang tinggi, kamu akan menemukan bahwa <em>matematika tidak sulit</em>—asal kita memahami dasarnya dan berlatih dengan cara yang benar.  
+        Mari kita jelajahi dunia angka dan bentuk, serta belajar bagaimana matematika hadir dalam kehidupan sehari-hari!  
+        <br><br>
+        Siap untuk memulai petualangan logika dan pola? Pilih halaman di bawah ini!
+      </p>
+    </div>
+
+    <!-- Menu Pilihan -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+      <a href="bilangan.html" class="btn-cute cute-card px-6 py-8 rounded-3xl shadow-2xl group text-center block">
+        <div class="text-5xl mb-3 group-hover:scale-125 transition-transform">🔢</div>
+        <div class="fredoka text-xl bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent">
+          Bilangan
+        </div>
+        <p class="text-sm text-gray-600 mt-2">Pelajari konsep bilangan</p>
+      </a>
+      
+      <a href="geometri.html" class="btn-cute cute-card px-6 py-8 rounded-3xl shadow-2xl group text-center block">
+        <div class="text-5xl mb-3 group-hover:scale-125 transition-transform">📐</div>
+        <div class="fredoka text-xl bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
+          Geometri
+        </div>
+        <p class="text-sm text-gray-600 mt-2">Jelajahi bentuk dan ruang</p>
+      </a>
+      
+      <a href="game.html" class="btn-cute cute-card px-6 py-8 rounded-3xl shadow-2xl group text-center block">
+        <div class="text-5xl mb-3 group-hover:scale-125 transition-transform">🎮</div>
+        <div class="fredoka text-xl bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+          Quiz
+        </div>
+        <p class="text-sm text-gray-600 mt-2">Uji pengetahuanmu</p>
+      </a>
+      
+      <a href="evaluasi.html" class="btn-cute cute-card px-6 py-8 rounded-3xl shadow-2xl group text-center block">
+        <div class="text-5xl mb-3 group-hover:scale-125 transition-transform">⭐</div>
+        <div class="fredoka text-xl bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+          Evaluasi
+        </div>
+        <p class="text-sm text-gray-600 mt-2">Tes kemampuan akhir</p>
+      </a>
+    </div>
+
+    <!-- Foto Kelompok -->
+    <div class="mt-12 text-center">
+      <h3 class="fredoka text-2xl mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+        👥 Anggota Kelompok 4
+      </h3>
+      <div class="flex flex-wrap justify-center gap-8">
+        <div class="text-center">
+          <img src="aafiyah.jpeg" alt="Aafiyah" class="foto mx-auto">
+          <p class="foto-label">Aafiyah (074)</p>
+        </div>
+        <div class="text-center">
+          <img src="dian.jpeg" alt="Dian" class="foto mx-auto">
+          <p class="foto-label">Dian (075)</p>
+        </div>
+        <div class="text-center">
+          <img src="intan.jpeg" alt="Intan" class="foto mx-auto">
+          <p class="foto-label">Intan (086)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote -->
+    <div class="mt-10 text-center">
+      <p class="text-lg italic text-gray-700 bg-gradient-to-r from-purple-50 to-pink-50 px-6 py-4 rounded-2xl shadow-md">
+        "Matematika adalah bahasa semesta — setiap angka menyimpan cerita dan makna."
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="cute-card text-center mt-auto mx-4 mb-4 py-4 rounded-3xl relative z-10">
+    <p class="text-gray-600 text-sm font-semibold">
+      ✨ © 2025 Kelompok 4 | Kelas C2023 - Universitas PGRI Kanjuruhan Malang
+      <br>Belajar dengan hati, berpikir dengan logika, dan beraksi dengan semangat! ✨
+    </p>
+  </footer>
+
+  <script>
+    // Create animated stars
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.width = Math.random() * 3 + 'px';
+      star.style.height = star.style.width;
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      starsContainer.appendChild(star);
+    }
+  </script>
+</body>
+</html>

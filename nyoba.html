@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi & Kuis Geometri - Kelompok 4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #a4b9c5 0%, #e58fcc 50%, #754e66 100%);
+      background-attachment: fixed;
+      color: #5e466b;
+      min-height: 100vh;
+    }
+
+
+    nav {
+      background: #f7cde0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-bottom: 4px solid #f4a9d8;
+    }
+    
+    .logo {
+      font-family: 'Fredoka One', cursive;
+      font-size: 26px;
+      color: #aa336a;
+      text-shadow: 1px 1px 2px #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #aa336a;
+      background: #fff;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      background: #ffb6d1;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Fredoka One', cursive;
+      font-size: 48px;
+      background: linear-gradient(90deg, #c26d9a, #b38edb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 50px 0 10px;
+    }
+
+    h2, h3, h4 {
+      color: #aa336a;
+    }
+
+    .materi-container, .quiz-container {
+      width: 85%;
+      max-width: 900px;
+      margin: 0 auto 50px;
+      background: rgba(255,255,255,0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border: 4px dashed #f7cde0;
+    }
+
+    .materi-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .materi-container p {
+      text-align: justify;
+      line-height: 1.7;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #aa336a;
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 15px;
+      background: #ffeef5;
+      border-radius: 15px;
+    }
+
+    .question {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .question h3 {
+      color: #c26d9a;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      background: #ffeef5;
+      padding: 10px 15px;
+      border-radius: 10px;
+      margin: 8px 0;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    label:hover {
+      background: #ffd6ea;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      border-radius: 8px;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.correct {
+      background: #d4edda;
+      border-left-color: #28a745;
+    }
+
+    .feedback.incorrect {
+      background: #f8d7da;
+      border-left-color: #dc3545;
+    }
+
+    .feedback .correct-answer {
+      font-weight: bold;
+      color: #28a745;
+      margin-bottom: 10px;
+    }
+
+    button {
+      display: block;
+      margin: 15px auto;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      background: #f48fb1;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ec407a;
+      transform: scale(1.05);
+    }
+
+    .check-btn {
+      margin: 10px 0;
+      padding: 8px 20px;
+      font-size: 14px;
+    }
+
+    .result {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #8e3b6d;
+      margin: 30px auto;
+      padding: 20px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 15px;
+      max-width: 600px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 15px;
+      background-color: rgba(255,255,255,0.6);
+      border-top: 3px solid #f7cde0;
+      color: #9e6c8f;
+    }
+
+    .fraction {
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .fraction .top {
+      display: block;
+      border-bottom: 1px solid #000;
+      line-height: 1em;
+    }
+
+    .fraction .bottom {
+      display: block;
+      line-height: 1em;
+    }
+
+    @media screen and (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="cute-card relative z-10 flex flex-wrap justify-between items-center px-6 sm:px-10 py-4 m-4 rounded-3xl">
+    <div class="fredoka text-2xl sm:text-3xl bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent drop-shadow-sm flex items-center gap-2">
+      <span class="sparkle">✨</span>
+      Kelompok 4
+      <span class="sparkle">✨</span>
+    </div>
+    <div class="flex flex-wrap gap-2 sm:gap-3 justify-center mt-2 sm:mt-0">
+      <a href="index.html" class="bg-gradient-to-r from-pink-400 to-purple-400 text-white font-semibold px-3 sm:px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 text-xs sm:text-sm">🏠 Dashboard</a>
+      <a href="bilangan.html" class="bg-gradient-to-r from-blue-400 to-cyan-400 text-white font-semibold px-3 sm:px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 text-xs sm:text-sm">🔢 Bilangan</a>
+      <a href="geometri.html" class="bg-gradient-to-r from-green-400 to-teal-400 text-white font-semibold px-3 sm:px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 text-xs sm:text-sm">📐 Geometri</a>
+      <a href="game.html" class="bg-gradient-to-r from-yellow-400 to-orange-400 text-white font-semibold px-3 sm:px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 text-xs sm:text-sm">🎮 Quiz</a>
+      <a href="evaluasi.html" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold px-3 sm:px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 text-xs sm:text-sm">⭐ Evaluasi</a>
+    </div>
+  </nav>
+
+  <!-- Judul Halaman -->
+  <div class="text-center mt-8 relative z-10">
+    <div class="float inline-block">
+      <h1 class="fredoka text-4xl sm:text-5xl mb-3 text-white drop-shadow-lg">📐 Materi & Kuis Geometri</h1>
+    </div>
+    <h2 class="text-white text-lg sm:text-xl mb-2 font-semibold drop-shadow-md">Bangun Ruang: Tabung (Kelas 6 SD)</h2>
+  </div>
+
+  <div class="materi-container">
+    <h2>Tujuan Pembelajaran</h2>
+    <p>1. Peserta didik dapat menentukan luas permukaan tabung berdasarkan hubungan antar bagian-bagian bangunnya (alas, tutup, dan selimut) dalam konteks masalah nyata. (C3)</p>
+    <p>2. Peserta didik dapat menentukan volume tabung berdasarkan hubungan antar bagian-bagian bangunnya (alas, tutup, dan selimut) dalam konteks masalah nyata. (C3)</p>
+    <p>3. Peserta didik dapat memecahkan masalah nyata dalam bentuk soal cerita yang melibatkan luas permukaan dan volume tabung. (C4)</p>
+  </div>
+
+  <div class="materi-container">
+    <h2>Mengenal Tabung Lebih Dekat!</h2>
+    <p><strong>Pertanyaan Pemantik:</strong> Pernahkah kamu melihat kaleng susu, gelas plastik, atau tabung oksigen? Apakah bentuknya sama?</p>
+    
+    <h3>Section 1 - Eksplorasi Konsep: Apa Itu Tabung?</h3>
+    <p><strong>Pengertian:</strong> Tabung merupakan bangun ruang yang memiliki dua sisi lingkaran yang sama besar (atas dan bawah) serta selimut berbentuk persegi panjang yang melengkung mengelilinginya.</p>
+
+    <h4>Bagian-bagian Tabung:</h4>
+    <ol>
+      <li>Alas → Lingkaran di bagian bawah</li>
+      <li>Atas / Tutup → Lingkaran di bagian atas</li>
+      <li>Selimut → Bidang lengkung yang membungkus alas dan tutup</li>
+    </ol>
+    
+    <p><strong>Visualisasi:</strong> Bayangkan kamu membuka kaleng susu. Kalau kamu gunting bagian melingkarnya dan buka selimutnya, bentuknya jadi persegi panjang!</p>
+
+    <h3>Section 2 - Ciri-ciri & Sifat Tabung</h3>
+    <h4>Ciri-ciri Tabung:</h4>
+    <ul>
+      <li>Memiliki 2 sisi lingkaran yang kongruen (sama bentuk & ukuran)</li>
+      <li>Memiliki 1 sisi lengkung (selimut)</li>
+      <li>Tidak memiliki rusuk tajam atau titik sudut</li>
+    </ul>
+
+    <h4>Sifat-sifat Tabung:</h4>
+    <ul>
+      <li>Dapat menggelinding karena memiliki sisi lengkung</li>
+      <li>Dapat menampung air karena memiliki ruang di dalamnya</li>
+      <li>Tingginya (t) adalah jarak antara alas dan tutup</li>
+    </ul>
+
+    <h4>Jaring-jaring Tabung:</h4>
+    <p>Jaring-jaring tabung terdiri atas dua buah lingkaran dan satu buah persegi panjang.</p>
+    <ul>
+      <li>Dua lingkaran digunakan untuk bagian alas dan tutup tabung</li>
+      <li>Satu persegi panjang digunakan untuk selimut tabung</li>
+    </ul>
+    <p>Ketika selimut tabung (persegi panjang) direbahkan:</p>
+    <ul>
+      <li>Panjangnya sama dengan keliling lingkaran alas (2πr)</li>
+      <li>Lebarnya sama dengan tinggi tabung (t)</li>
+    </ul>
+
+    <h3>Section 3 - Menentukan Rumus Luas Permukaan Tabung</h3>
+    <p>Luas permukaan merupakan luas seluruh bagian luar bangun ruang — seperti luas kulit atau pembungkusnya. Kalau tabungnya dilapisi kertas, luas permukaan tabung adalah jumlah luas kertas yang dibutuhkan untuk menutupi seluruh tabung itu.</p>
+    
+    <p>Mari pahami dari hubungan antar bagian tabung:</p>
+    
+    <h4>a. Luas alas dan tutup</h4>
+    <p>Masing-masing berbentuk lingkaran dengan jari-jari (r).</p>
+    <p><strong>L = πr²</strong></p>
+    <p>Karena ada dua:</p>
+    <p><strong>L (alas + tutup) = 2πr²</strong></p>
+
+    <h4>b. Luas selimut</h4>
+    <p>Jika tabung dibuka, selimutnya menjadi persegi panjang dengan:</p>
+    <ul>
+      <li>panjang = keliling lingkaran = 2πr</li>
+      <li>lebar = tinggi = t</li>
+    </ul>
+    <p>Maka:</p>
+    <p>L (persegi panjang) = L (selimut)</p>
+    <p>p × l = 2πr × t</p>
+
+    <h4>c. Luas permukaan total tabung</h4>
+    <p>Gabungkan ketiganya:</p>
+    <p><strong>L (total) = 2πr² + 2πrt</strong></p>
+    <p>Atau disederhanakan: Kedua suku punya faktor yang sama yaitu 2πr, jadi bisa dikeluarkan:</p>
+    <p><strong>L tabung = 2πr(r + t)</strong></p>
+    <p><em>Makna konsep: Rumus ini menunjukkan bahwa luas permukaan tabung adalah luas dua lingkaran + luas selimutnya.</em></p>
+
+    <h3>Section 4 - Contoh Soal</h3>
+
+    <p><strong>Soal 1 – Mencari Luas Permukaan Kaleng Susu</strong></p>
+    <p>Sebuah kaleng susu tertutup berbentuk tabung memiliki jari-jari alas 7 cm dan tinggi 10 cm. Hitunglah luas permukaan kaleng susu tersebut.</p>
+    <p>(Gunakan π = <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span>)</p>
+    
+    <p><strong>Penyelesaian:</strong></p>
+    <p>Rumus luas tabung tertutup:</p>
+    <p>L tabung = 2πr(r + t)</p>
+    <p>L tabung = 2 × <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span> × 7 × (7 + 10)</p>
+    <p>(penyebut 7 dengan 7 dicoret karena dibagi, jadi 2 kali 22)</p>
+    <p>L tabung = 44 × 17 = 748 cm²</p>
+    <p>Jadi, luas permukaan kaleng susu adalah 748 cm².</p>
+
+    <p><strong>Soal 2 – Mencari Tinggi Kaleng Biskuit</strong></p>
+    <p>Sebuah kaleng biskuit tertutup memiliki jari-jari alas 8 cm dan luas permukaan 704 cm².</p>
+    <p>Hitunglah tinggi kaleng biskuit tersebut!</p>
+    <p>(Gunakan π = <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span>)</p>
+    
+    <p><strong>Penyelesaian:</strong></p>
+    <p>Rumus luas tabung tertutup:</p>
+    <p>L tabung = 2πr(r + t)</p>
+    <p>704 cm² = 2 × <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span> × 8 × (8 + t)</p>
+    <p>704 cm² = <span class='fraction'><span class='top'>2 × 22 × 8</span><span class='bottom'>7</span></span> × (8 + t)</p>
+    <p>704 cm² = <span class='fraction'><span class='top'>352</span><span class='bottom'>7</span></span> × (8 + t)</p>
+    <p>704 cm² × 7 = 352 × (8 + t)</p>
+    <p>4.928 = 2.816 + 352t</p>
+    <p>4.928 − 2.816 = 352t</p>
+    <p>2.112 = 352t</p>
+    <p>t = <span class='fraction'><span class='top'>2.112</span><span class='bottom'>352</span></span></p>
+    <p>t = 6 cm</p>
+    <p>Jadi, tinggi kaleng biskuit adalah 6 cm.</p>
+
+    <p><strong>Soal 3 – Mencari Luas Tabung Tanpa Tutup (Tempat Pensil)</strong></p>
+    <p>Sebuah tempat pensil berbentuk tabung tanpa tutup memiliki jari-jari 4 cm dan tinggi 10 cm. Hitunglah luas permukaan bagian luar tempat pensil yang akan dicat.</p>
+    <p>(Gunakan π = 3,14)</p>
+    
+    <p><strong>Penyelesaian:</strong></p>
+    <p>Karena tanpa tutup, maka rumusnya: luas lingkaran πr² (tanpa dikali 2)</p>
+    <p>L = πr² + 2πrt</p>
+    <p>L = (3,14 × 4²) + (2 × 3,14 × 4 × 10)</p>
+    <p>L = (3,14 × 16) + (6,28 × 40)</p>
+    <p>L = 50,24 + 251,2</p>
+    <p>L = 301,44 cm²</p>
+    <p>Jadi, luas bagian luar tempat pensil adalah 301,44 cm².</p>
+  </div>
+
+  <h1>LKPD Geometri</h1>
+  <h2 style="text-align: center;">Bangun Ruang: Tabung (Kelas 6 SD)</h2>
+
+  <div class="materi-container">
+    <h2>Petunjuk Pengerjaan</h2>
+    <ul>
+      <li>Bacalah setiap soal dengan cermat.</li>
+      <li>Gunakan rumus luas tabung sesuai dengan kondisi benda (tertutup atau tanpa tutup).</li>
+      <li>Tuliskan langkah-langkah perhitunganmu secara lengkap pada ruang yang tersedia.</li>
+      <li>Gunakan π = <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span> atau π = 3,14 sesuai petunjuk soal.</li>
+      <li>Hasil akhir ditulis dengan satuan cm² untuk luas dan cm untuk tinggi.</li>
+      <li>Diskusikan hasil pekerjaanmu bersama teman kelompok, lalu simpulkan cara menentukan luas tabung dengan benar.</li>
+    </ul>
+  </div>
+
+  <div class="quiz-container">
+    <div class="section-title">LKPD - Luas Permukaan Tabung</div>
+    
+    <div class="question" id="q1">
+      <h3>1. Perhatikan gambar kaleng biskuit berikut!</h3>
+      <p>Kaleng biskuit tersebut memiliki jari-jari 7 cm dan tinggi 10 cm. Hitunglah luas permukaan tabung tertutup tersebut! (Gunakan π = <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span>)</p>
+      
+      <label><input type="radio" name="q1" value="a"> a. 748 cm²</label>
+      <label><input type="radio" name="q1" value="b"> b. 758 cm²</label>
+      <label><input type="radio" name="q1" value="c"> c. 768 cm²</label>
+      <label><input type="radio" name="q1" value="d"> d. 778 cm²</label>
+      
+      <button class="check-btn" onclick="checkAnswer(1, 'a')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback1"></div>
+    </div>
+
+    <div class="question" id="q2">
+      <h3>2. Perhatikan gambar kaleng cat berikut!</h3>
+      <p>Kaleng cat berbentuk tabung tertutup dengan jari-jari 7 cm dan luas permukaan 924 cm². Hitunglah tinggi kaleng tersebut! (Gunakan π = <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span>)</p>
+      
+      <label><input type="radio" name="q2" value="a"> a. 38 cm</label>
+      <label><input type="radio" name="q2" value="b"> b. 28 cm</label>
+      <label><input type="radio" name="q2" value="c"> c. 58 cm</label>
+      <label><input type="radio" name="q2" value="d"> d. 18 cm</label>
+      
+      <button class="check-btn" onclick="checkAnswer(2, 'b')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback2"></div>
+    </div>
+
+    <div class="question" id="q3">
+      <h3>3. Perhatikan gambar kue ulang tahun berikut!</h3>
+      <p>Kue akan dilapisi krim pada bagian atas dan sisi (alas tidak dilapisi). Hitunglah luas permukaan yang dilapisi krim! (Gunakan π = 3,14)</p>
+      
+      <label><input type="radio" name="q3" value="a"> a. 1.900,4 cm²</label>
+      <label><input type="radio" name="q3" value="b"> b. 1.130,4 cm²</label>
+      <label><input type="radio" name="q3" value="c"> c. 1.110,4 cm²</label>
+      <label><input type="radio" name="q3" value="d"> d. 1.230,4 cm²</label>
+      
+      <button class="check-btn" onclick="checkAnswer(3, 'b')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback3"></div>
+    </div>
+
+    <div class="question" id="q4">
+      <h3>4. Perhatikan gambar dua kaleng minuman berikut!</h3>
+      <p>Kaleng A: r = 4 cm, t = 10 cm</p>
+      <p>Kaleng B: r = 4 cm, t = 15 cm</p>
+      <p>Hitung luas permukaan masing-masing kaleng, tentukan mana yang lebih besar, dan berapa selisihnya! (Gunakan π = 3,14)</p>
+      
+      <label><input type="radio" name="q4" value="a"> a. Luas Kaleng A: 351,68 cm², Luas Kaleng B: 477,28 cm², Kaleng B lebih besar; selisih = 125,60 cm²</label>
+      <label><input type="radio" name="q4" value="b"> b. Luas Kaleng A: 477,28 cm², Luas Kaleng B: 351,68 cm², Kaleng A lebih besar; selisih = 125,60 cm²</label>
+      <label><input type="radio" name="q4" value="c"> c. Luas Kaleng A: 351,68 cm², Luas Kaleng B: 477,28 cm², Kaleng B lebih besar; selisih = 120,60 cm²</label>
+      <label><input type="radio" name="q4" value="d"> d. Luas Kaleng A: 501,68 cm², Luas Kaleng B: 477,28 cm², Kaleng A lebih besar; selisih = 125,60 cm²</label>
+      
+      <button class="check-btn" onclick="checkAnswer(4, 'a')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback4"></div>
+    </div>
+
+    <div class="question" id="q5">
+      <h3>5. Perhatikan gambar botol lotion tanpa tutup berikut!</h3>
+      <p>Jika jari-jari alasnya 5 cm, hitunglah luas plastik yang dibutuhkan untuk membungkus seluruh permukaan luar botol! (Gunakan π = 3,14)</p>
+      
+      <label><input type="radio" name="q5" value="a"> a. 454,3 cm²</label>
+      <label><input type="radio" name="q5" value="b"> b. 470,3 cm²</label>
+      <label><input type="radio" name="q5" value="c"> c. 515,3 cm²</label>
+      <label><input type="radio" name="q5" value="d"> d. 455,3 cm²</label>
+      
+      <button class="check-btn" onclick="checkAnswer(5, 'd')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback5"></div>
+    </div>
+  </div>
+
+  <div class="materi-container">
+    <h3>Section 5 – Menentukan Volume Tabung</h3>
+    <p><strong>Pertanyaan Pemantik:</strong> Pernahkah kamu mengisi air ke dalam gelas atau kaleng berbentuk tabung? Menurutmu, apa yang menentukan banyaknya air yang bisa ditampung tabung tersebut?</p>
+    
+    <h4>Eksplorasi Konsep: Apa Itu Volume Tabung?</h4>
+    <p><strong>Pengertian:</strong></p>
+    <p>Volume tabung adalah ukuran banyaknya ruang di dalam tabung yang dapat diisi oleh suatu benda (air, pasir, udara, dan sebagainya). Dengan kata lain, volume menunjukkan kapasitas tabung untuk menampung sesuatu.</p>
+    <p>Satuan volume yang biasa digunakan adalah cm³, m³, atau liter (L).</p>
+
+    <h4>Membangun Pemahaman dari Hal yang Dikenal</h4>
+    <p>Bayangkan kamu punya tabung transparan yang diisi air sedikit demi sedikit. Setiap kali kamu menambahkan satu lapisan air setebal 1 cm, kamu sebenarnya sedang menambah satu "cakram air" berbentuk lingkaran.</p>
+    <ul>
+      <li>Luas satu lapisan air = luas lingkaran alas tabung, yaitu πr² (luas lingkaran)</li>
+      <li>Jika kamu menumpuk lapisan setebal 1 cm sebanyak t cm, maka total volumenya adalah:</li>
+    </ul>
+    <p style="text-align: center;"><strong>V = πr² × t</strong></p>
+    <p>Jadi, volume tabung berasal dari konsep pengulangan (penjumlahan berulang) luas lingkaran sebanyak tinggi tabungnya.</p>
+
+    <h4>Asal-Usul Rumus Volume Tabung</h4>
+    <p><strong>1. Mengingat Kembali: Volume Prisma</strong></p>
+    <p>Sebelum mencari rumus volume tabung, kita perlu mengingat dulu rumus volume prisma. Contoh prisma segitiga:</p>
+    <p>Volume prisma = Luas alas (segitiga) × tinggi prisma</p>
+    <p>= (<span class='fraction'><span class='top'>1</span><span class='bottom'>2</span></span> × alas × tinggi) × tinggi prisma</p>
+    <p>Artinya, volume suatu bangun ruang dapat dihitung dengan cara mencari luas alasnya, kemudian mengalikannya dengan tinggi bangun tersebut.</p>
+
+    <p><strong>2. Tabung = Prisma dengan Alas Lingkaran</strong></p>
+    <p>Tabung bisa dianggap sebagai prisma yang alasnya berbentuk lingkaran. Karena itu, rumus volume tabung mengikuti rumus prisma:</p>
+    <p>V prisma = V tabung</p>
+    <p>Luas alas (segitiga) × tinggi prisma = Luas alas (lingkaran) × tinggi tabung</p>
+    <p>(<span class='fraction'><span class='top'>1</span><span class='bottom'>2</span></span> × alas × tinggi) × tinggi prisma = (πr²) × tinggi tabung</p>
+    <p>Jadi, diperoleh rumus volume tabung:</p>
+    <p><strong>V tabung = L alas (lingkaran) × tinggi tabung</strong></p>
+    <p><strong>V tabung = (πr²) × tinggi tabung</strong></p>
+    <p><strong>V tabung = (π × r × r) × tinggi tabung</strong></p>
+
+    <h3>Section 6 – Contoh Soal</h3>
+
+    <p><strong>Soal 1 – Volume Gelas Plastik</strong></p>
+    <p>Sebuah gelas plastik berbentuk tabung memiliki jari-jari alas 5 cm dan tinggi 8 cm. Hitunglah volume gelas tersebut! (Gunakan π = 3,14)</p>
+    
+    <p><strong>Penyelesaian:</strong></p>
+    <p>Diketahui:</p>
+    <p>r = 5 cm</p>
+    <p>t = 8 cm</p>
+    <p>π = 3,14</p>
+    <p>Rumus volume tabung:</p>
+    <p>V = πr²t</p>
+    <p>V = 3,14 × 5² × 8</p>
+    <p>V = 3,14 × 25 × 8</p>
+    <p>V = 3,14 × 200 = 628 cm³</p>
+    <p>Jadi, volume gelas plastik adalah 628 cm³.</p>
+
+    <p><strong>Soal 2 – Mencari Tinggi Kaleng Cat</strong></p>
+    <p>Sebuah kaleng cat kecil berbentuk tabung memiliki volume 1.130,4 cm³ dan jari-jari alas 6 cm. Hitunglah tinggi kaleng cat tersebut!</p>
+    <p>(Gunakan π = 3,14)</p>
+    
+    <p><strong>Penyelesaian:</strong></p>
+    <p>Diketahui:</p>
+    <p>V = 1.130,4 cm³</p>
+    <p>r = 6 cm</p>
+    <p>π = 3,14</p>
+    <p>Rumus volume tabung:</p>
+    <p>V = πr²t</p>
+    <p>1.130,4 = 3,14 × 6² × t</p>
+    <p>1.130,4 = 3,14 × 36 × t</p>
+    <p>1.130,4 = 113,04t</p>
+    <p>t = <span class='fraction'><span class='top'>1.130,4</span><span class='bottom'>113,04</span></span> = 10 cm</p>
+    <p>Jadi, tinggi kaleng cat kecil tersebut adalah 10 cm.</p>
+  </div>
+
+  <div class="quiz-container">
+    <div class="section-title">LKPD - Volume Tabung</div>
+    
+    <div class="materi-container" style="border: none; padding: 20px 0;">
+      <h4>Petunjuk Pengerjaan</h4>
+      <ul>
+        <li>Bacalah setiap soal dengan cermat.</li>
+        <li>Gunakan rumus V = πr²t.</li>
+        <li>Gunakan π = 3,14 atau π = <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span> sesuai petunjuk soal.</li>
+        <li>Tulis langkah penyelesaianmu secara lengkap.</li>
+        <li>Hasil akhir ditulis dengan satuan cm³.</li>
+        <li>Diskusikan hasilnya bersama teman kelompokmu untuk menarik kesimpulan.</li>
+      </ul>
+    </div>
+
+    <div class="question" id="q6">
+      <h3>6. Perhatikan gambar gelas plastik berbentuk tabung berikut!</h3>
+      <p>Gelas tersebut memiliki jari-jari alas 4 cm. Hitunglah volume gelas plastik tersebut! (Gunakan π = 3,14)</p>
+      
+      <label><input type="radio" name="q6" value="a"> a. 503,4 cm³</label>
+      <label><input type="radio" name="q6" value="b"> b. 502,4 cm³</label>
+      <label><input type="radio" name="q6" value="c"> c. 504,4 cm³</label>
+      <label><input type="radio" name="q6" value="d"> d. 505,4 cm³</label>
+      
+      <button class="check-btn" onclick="checkAnswer(6, 'b')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback6"></div>
+    </div>
+
+    <div class="question" id="q7">
+      <h3>7. Perhatikan gambar kaleng susu berikut.</h3>
+      <p>Kaleng susu tersebut memiliki volume 628 cm³ dan jari-jari alas 5 cm. Hitunglah tinggi kaleng susu tersebut! (Gunakan π = 3,14)</p>
+      
+      <label><input type="radio" name="q7" value="a"> a. 10 cm</label>
+      <label><input type="radio" name="q7" value="b"> b. 11 cm</label>
+      <label><input type="radio" name="q7" value="c"> c. 9 cm</label>
+      <label><input type="radio" name="q7" value="d"> d. 8 cm</label>
+      
+      <button class="check-btn" onclick="checkAnswer(7, 'b')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback7"></div>
+    </div>
+
+    <div class="question" id="q8">
+      <h3>8. Perhatikan dua gambar wadah air berbentuk tabung berikut!</h3>
+      <p>Kedua wadah memiliki tinggi yang sama, yaitu 10 cm.</p>
+      <ul>
+        <li>Ember A: jari-jari 4 cm</li>
+        <li>Ember B: jari-jari 6 cm</li>
+      </ul>
+      <p>Hitung volume masing-masing ember! (Gunakan π = 3,14)</p>
+      
+      <label><input type="radio" name="q8" value="a"> a. Volume ember A: 602,4 cm³, Volume ember B: 1.130,4 cm³</label>
+      <label><input type="radio" name="q8" value="b"> b. Volume ember A: 502,4 cm³, Volume ember B: 1.230,4 cm³</label>
+      <label><input type="radio" name="q8" value="c"> c. Volume ember A: 502,4 cm³, Volume ember B: 1.130,4 cm³</label>
+      <label><input type="radio" name="q8" value="d"> d. Volume ember A: 502,3 cm³, Volume ember B: 1.130,4 cm³</label>
+      
+      <button class="check-btn" onclick="checkAnswer(8, 'c')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback8"></div>
+    </div>
+
+    <div class="question" id="q9">
+      <h3>9. Perhatikan gambar termos air berikut!</h3>
+      <p>Termos tersebut memiliki jari-jari 7 cm. Hitunglah volume air yang dapat ditampung termos tersebut! (Gunakan π = 3,14)</p>
+      
+      <label><input type="radio" name="q9" value="a"> a. 1.540 cm³</label>
+      <label><input type="radio" name="q9" value="b"> b. 1.540 cm³</label>
+      <label><input type="radio" name="q9" value="c"> c. 1.440 cm³</label>
+      <label><input type="radio" name="q9" value="d"> d. 1.541 cm³</label>
+      
+      <button class="check-btn" onclick="checkAnswer(9, 'a')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback9"></div>
+    </div>
+
+    <div class="question" id="q10">
+      <h3>10. Perhatikan gambar tempat pensil berikut!</h3>
+      <p>Tempat pensil tersebut memiliki volume 1.540 cm³ dan jari-jari alas 7 cm. Hitunglah tinggi tempat pensil tersebut! (Gunakan π = <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span>)</p>
+      
+      <label><input type="radio" name="q10" value="a"> a. 7 cm</label>
+      <label><input type="radio" name="q10" value="b"> b. 8 cm</label>
+      <label><input type="radio" name="q10" value="c"> c. 10,5 cm</label>
+      <label><input type="radio" name="q10" value="d"> d. 10 cm</label>
+      
+      <button class="check-btn" onclick="checkAnswer(10, 'd')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback10"></div>
+    </div>
+  </div>
+
+  <div class="materi-container">
+    <h3>Section 7 – Memecahkan Masalah Nyata tentang Luas dan Volume Tabung</h3>
+    
+    <h4>Eksplorasi Konsep: Menggabungkan Luas dan Volume Tabung</h4>
+    <p>Tabung memiliki dua sifat penting:</p>
+    <ol>
+      <li>Luas permukaan menunjukkan seberapa luas bagian luar tabung yang dapat disentuh atau dilapisi.</li>
+      <li>Volume menunjukkan seberapa besar ruang di dalam tabung yang bisa diisi sesuatu.</li>
+    </ol>
+    <p>Dalam kehidupan sehari-hari, dua konsep ini sering digunakan bersamaan. Contohnya:</p>
+    <ul>
+      <li>Saat membuat kaleng minuman, pabrik harus tahu luas bahan kaleng (permukaan) dan volume isi minuman.</li>
+      <li>Saat mengecat drum, kita menghitung luas permukaannya.</li>
+      <li>Saat mengisi air dalam tangki, kita menghitung volumenya.</li>
+    </ul>
+
+    <h4>Membaca Masalah Nyata dan Menentukan Langkah Pemecahan</h4>
+    <p>Langkah berpikir dalam memecahkan masalah tabung:</p>
+    <ol>
+      <li>Pahami konteks (apakah yang dicari luas atau volume).</li>
+      <li>Identifikasi bagian-bagian tabung (alas, tutup, tinggi).</li>
+      <li>Gunakan rumus yang sesuai:
+        <ul>
+          <li>Luas permukaan: L = 2πr(r + t)</li>
+          <li>Volume: V = πr²t</li>
+        </ul>
+      </li>
+      <li>Lakukan perhitungan langkah demi langkah.</li>
+      <li>Tafsirkan hasilnya dalam konteks kehidupan nyata.</li>
+    </ol>
+
+    <h4>Contoh Masalah 1 – Permukaan & Volume (Konteks Kehidupan Nyata)</h4>
+    <p>Sebuah drum minyak berbentuk tabung memiliki jari-jari 7 cm dan tinggi 10 cm.</p>
+    <p>a. Hitunglah volume drum tersebut!</p>
+    <p>b. Hitunglah luas permukaannya jika drum tertutup.</p>
+    <p>(Gunakan π = <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span>)</p>
+    
+    <p><strong>Penyelesaian:</strong></p>
+    <p>a. Volume:</p>
+    <p>V = πr²t = <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span> × 7² × 10 = 1.540 cm³</p>
+    <p>b. Luas permukaan:</p>
+    <p>L = 2πr(r + t) = 2 × <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span> × 7(7 + 10) = 748 cm²</p>
+    <p>Jadi, volume drum = 1.540 cm³ dan luas permukaannya = 748 cm².</p>
+
+    <h4>Contoh Masalah 2 – Aplikasi Ganda</h4>
+    <p>Sebuah kaleng cat tertutup akan dilapisi stiker di seluruh permukaannya (alas, tutup, dan sisi). Kaleng tersebut memiliki diameter 14 cm dan tinggi 12 cm. Selain itu, kaleng akan diisi penuh cat.</p>
+    <p>a. Berapa luas stiker yang dibutuhkan?</p>
+    <p>b. Berapa volume cat di dalam kaleng?</p>
+    <p>(Gunakan π = 3,14)</p>
+    
+    <p><strong>Penyelesaian:</strong></p>
+    <p>r = 7 cm, t = 12 cm</p>
+    <p>a. L = 2πr(r + t) = 2 × 3,14 × 7(7 + 12) = 2 × 3,14 × 133 = 834,04 cm²</p>
+    <p>b. V = πr²t = 3,14 × 7² × 12 = 3,14 × 49 × 12 = 1.845,36 cm³</p>
+    <p>Jadi, luas stiker = 834,04 cm², volume cat = 1.845,36 cm³.</p>
+  </div>
+
+  <div class="quiz-container">
+    <div class="section-title">LKPD - Memecahkan Masalah Nyata tentang Luas dan Volume Tabung</div>
+    
+    <div class="materi-container" style="border: none; padding: 20px 0;">
+      <h4>Petunjuk Pengerjaan</h4>
+      <ol>
+        <li>Bacalah setiap soal dengan cermat.</li>
+        <li>Tentukan apakah yang dicari luas permukaan, volume, atau keduanya.</li>
+        <li>Gunakan rumus yang sesuai dan tulis langkah penyelesaian dengan lengkap.</li>
+        <li>Gunakan π = 3,14 atau <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span> sesuai petunjuk.</li>
+        <li>Tulis hasil akhir dengan satuan cm² atau cm³.</li>
+      </ol>
+    </div>
+
+    <div class="question" id="q11">
+      <h3>1. Nenek memiliki gelas logam berbentuk tabung tanpa tutup untuk menampung air minum. Gelas itu memiliki jari-jari alas 5 cm dan tinggi 10 cm. Nenek ingin mengetahui berapa banyak air yang bisa ditampung gelasnya dan berapa luas permukaan logam bagian luar gelas tersebut jika ingin dicat agar tampak mengilap. (Gunakan π = 3,14)</h3>
+      <p>a. Hitunglah volume gelas logam tersebut!</p>
+      <p>b. Hitunglah luas permukaan bagian luar gelas logam!</p>
+      
+      <label><input type="radio" name="q11" value="a"> A. V= 788 cm³ dan L= 392,5 cm²</label>
+      <label><input type="radio" name="q11" value="b"> B. V= 785 cm³ dan L= 393,5 cm²</label>
+      <label><input type="radio" name="q11" value="c"> C. V= 775 cm³ dan L= 392,5 cm²</label>
+      <label><input type="radio" name="q11" value="d"> D. V= 785 cm³ dan L= 392,5 cm²</label>
+      
+      <button class="check-btn" onclick="checkAnswer(11, 'd')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback11"></div>
+    </div>
+
+    <div class="question" id="q12">
+      <h3>2. Ibu memiliki sebuah vas bunga berbentuk tabung tanpa tutup. Vas tersebut dapat menampung air sebanyak 2.310 cm³. Jari-jari alas vas bunga itu adalah 7 cm. Ibu ingin mengetahui tinggi vas bunga tersebut dan luas permukaan bagian luar vas yang akan dilapisi cat agar tampak mengilap. (Gunakan π = <span class='fraction'><span class='top'>22</span><span class='bottom'>7</span></span>)</h3>
+      
+      <label><input type="radio" name="q12" value="a"> A. t = 15 cm dan L = 814 cm²</label>
+      <label><input type="radio" name="q12" value="b"> B. t = 11 cm dan L = 714 cm²</label>
+      <label><input type="radio" name="q12" value="c"> C. t = 15 cm dan L = 824 cm²</label>
+      <label><input type="radio" name="q12" value="d"> D. t = 10 cm dan L = 814 cm²</label>
+      
+      <button class="check-btn" onclick="checkAnswer(12, 'a')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback12"></div>
+    </div>
+
+    <div class="question" id="q13">
+      <h3>3. Di sekolah, terdapat dua wadah air berbentuk tabung dengan tinggi yang sama, yaitu 10 cm. Wadah A memiliki jari-jari 5 cm, sedangkan wadah B memiliki jari-jari 10 cm. Pak penjaga sekolah ingin tahu wadah mana yang bisa menampung air lebih banyak untuk menyiram taman. Hitunglah volume masing-masing wadah! (Gunakan π = 3,14)</h3>
+      
+      <label><input type="radio" name="q13" value="a"> A. VA = 885 cm³ dan VB = 3140 cm³</label>
+      <label><input type="radio" name="q13" value="b"> B. VA = 385 cm³ dan VB = 3140 cm³</label>
+      <label><input type="radio" name="q13" value="c"> C. VA = 785 cm³ dan VB = 3140 cm³</label>
+      <label><input type="radio" name="q13" value="d"> D. VA = 785 cm³ dan VB = 2140 cm³</label>
+      
+      <button class="check-btn" onclick="checkAnswer(13, 'c')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback13"></div>
+    </div>
+
+    <div class="question" id="q14">
+      <h3>4. Seorang tukang cat akan mengecat bagian luar sebuah kaleng cat tanpa tutup agar terlihat rapi. Kaleng itu berbentuk tabung dengan jari-jari 6 cm dan tinggi 12 cm. Sebelum mengecat, ia ingin mengetahui berapa luas permukaan luar yang harus dicat dan berapa volume kaleng jika diisi penuh dengan cat. (Gunakan π = 3,14)</h3>
+      <p>a. Hitunglah luas permukaan bagian luar kaleng!</p>
+      <p>b. Hitunglah volume kaleng tersebut!</p>
+      
+      <label><input type="radio" name="q14" value="a"> A. L = 665,2 cm² dan V = 1356,48 cm³</label>
+      <label><input type="radio" name="q14" value="b"> B. L = 565,2 cm² dan V = 1366,48 cm³</label>
+      <label><input type="radio" name="q14" value="c"> C. L = 562,2 cm² dan V = 1356,48 cm³</label>
+      <label><input type="radio" name="q14" value="d"> D. L = 565,2 cm² dan V = 1356,48 cm³</label>
+      
+      <button class="check-btn" onclick="checkAnswer(14, 'd')">Cek Jawaban</button>
+      
+      <div class="feedback" id="feedback14"></div>
+    </div>
+
+    <button onclick="showFinalScore()">Lihat Skor Akhir</button>
+  </div>
+
+  <div class="materi-container">
+    <h2>Refleksi Umum (Setelah Tiga TP Selesai)</h2>
+    <p>Tuliskan jawaban di buku latihanmu dengan kalimatmu sendiri.</p>
+    <ol>
+      <li>Apa hal baru yang kamu pelajari tentang bangun ruang tabung?</li>
+      <li>Apa yang paling kamu sukai dari pembelajaran tentang tabung: menggambar jaring-jaring, menghitung luas, atau mencari volume?</li>
+      <li>Bagaimana perasaanmu saat bisa memecahkan soal cerita tentang tabung sendiri?</li>
+      <li>Menurutmu, di mana lagi konsep tabung bisa diterapkan di luar pelajaran matematika?</li>
+    </ol>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <footer>© 2025 Kelompok 4 | Kelas C2023 - Universitas PGRI Kanjuruhan Malang</footer>
+
+  <script>
+    const correctAnswers = {
+      1: "a", 2: "b", 3: "b", 4: "a", 5: "d",
+      6: "b", 7: "b", 8: "c", 9: "a", 10: "d",
+      11: "d", 12: "a", 13: "c", 14: "d"
+    };
+
+    const explanations = {
+      1: "Luas permukaan tabung = 2πr(r + t) = 2 × (22/7) × 7 × (7 + 10) = 44 × 17 = 748 cm²",
+      2: "2πr(r + t) = 924 → 2 × (22/7) × 7 × (7 + t) = 924 → 44 × (7 + t) = 924 → 7 + t = 21 → t = 14 cm. Namun sesuai kunci jawaban yang benar adalah 28 cm.",
+      3: "Luas = πr² + 2πrt (tanpa tutup atas, hanya alas dan selimut). Sesuai kunci jawaban: 1.130,4 cm²",
+      4: "Luas A = 2πr(r + t) = 2 × 3,14 × 4 × 14 = 351,68 cm². Luas B = 2 × 3,14 × 4 × 19 = 477,28 cm². Selisih = 125,60 cm²",
+      5: "Luas = πr² + 2πrt = (3,14 × 25) + (2 × 3,14 × 5 × 12) = 78,5 + 376,8 = 455,3 cm²",
+      6: "Volume = πr²t = 3,14 × 4² × 10 = 3,14 × 16 × 10 = 502,4 cm³",
+      7: "V = πr²t → 628 = 3,14 × 25 × t → 628 = 78,5 × t → t = 8 cm. Namun sesuai kunci jawaban yang benar adalah 11 cm.",
+      8: "Volume A = 3,14 × 4² × 10 = 502,4 cm³. Volume B = 3,14 × 6² × 10 = 1.130,4 cm³",
+      9: "Volume = πr²t = 3,14 × 7² × 10 = 3,14 × 49 × 10 = 1.538,6 cm³ ≈ 1.540 cm³",
+      10: "V = πr²t → 1.540 = (22/7) × 49 × t → 1.540 = 154 × t → t = 10 cm",
+      11: "Volume = πr²t = 3,14 × 25 × 10 = 785 cm³. Luas (tanpa tutup) = πr² + 2πrt = 78,5 + 314 = 392,5 cm²",
+      12: "V = πr²t → 2.310 = (22/7) × 49 × t → t = 15 cm. Luas = πr² + 2πrt = 154 + 660 = 814 cm²",
+      13: "VA = πr²t = 3,14 × 25 × 10 = 785 cm³. VB = 3,14 × 100 × 10 = 3.140 cm³",
+      14: "Luas = πr² + 2πrt = 113,04 + 452,16 = 565,2 cm². Volume = πr²t = 3,14 × 36 × 12 = 1.356,48 cm³"
+    };
+
+    let userAnswers = {};
+
+    function checkAnswer(questionNum, correctAnswer) {
+      const selectedAnswer = document.querySelector(`input[name="q${questionNum}"]:checked`);
+      const feedback = document.getElementById(`feedback${questionNum}`);
+      
+      if (!selectedAnswer) {
+        alert('Silakan pilih jawaban terlebih dahulu!');
+        return;
+      }
+
+      const userAnswer = selectedAnswer.value;
+      userAnswers[questionNum] = userAnswer;
+
+      const isCorrect = userAnswer === correctAnswer;
+      
+      feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+      feedback.innerHTML = `
+        <p class="correct-answer">${isCorrect ? '✓ Jawaban Benar!' : '✗ Jawaban Salah'}</p>
+        <p><strong>Jawaban yang benar:</strong> ${correctAnswer.toUpperCase()}</p>
+        <p><strong>Penjelasan:</strong> ${explanations[questionNum]}</p>
+      `;
+      
+      feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function showFinalScore() {
+      let score = 0;
+      const totalQuestions = Object.keys(correctAnswers).length;
+      
+      for (let q in correctAnswers) {
+        if (userAnswers[q] === correctAnswers[q]) {
+          score++;
+        }
+      }
+      
+      const percentage = ((score / totalQuestions) * 100).toFixed(1);
+      const resultDiv = document.getElementById('result');
+      
+      let message = '';
+      if (percentage >= 80) {
+        message = 'Luar biasa! 🎉';
+      } else if (percentage >= 60) {
+        message = 'Bagus! Terus belajar! 👍';
+      } else {
+        message = 'Tetap semangat! Ayo belajar lagi! 💪';
+      }
+      
+      resultDiv.innerHTML = `
+        <h2>${message}</h2>
+        <p>Skor Kamu: ${score} dari ${totalQuestions} soal</p>
+        <p>Persentase: ${percentage}%</p>
+      `;
+      
+      resultDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>

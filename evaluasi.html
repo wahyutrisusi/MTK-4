@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎮 Evaluasi Matematika</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #a4b9c5 0%, #e58fcc 50%, #754e66 100%);
+        background-attachment: fixed;
+        color: #5e466b;
+      }
+      .fredoka {
+        font-family: "Fredoka One", cursive;
+      }
+      .cute-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 3px solid #fff;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      }
+      .sparkle {
+        animation: sparkle 2s infinite;
+      }
+      @keyframes sparkle {
+        0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+      }
+      .float {
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+      }
+      .btn-cute {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s;
+      }
+      .btn-cute:hover {
+        transform: scale(1.1) rotate(-2deg);
+      }
+      .btn-cute::before {
+        content: '✨';
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        font-size: 20px;
+        opacity: 0;
+        transition: all 0.3s;
+      }
+      .btn-cute:hover::before {
+        top: 10px;
+        opacity: 1;
+      }
+      .quiz-option {
+        transition: all 0.3s;
+        border: 2px solid transparent;
+      }
+      .quiz-option:hover {
+        border-color: #f093fb;
+        transform: translateX(10px);
+        box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+      }
+      .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 3s infinite;
+      }
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; }
+      }
+      
+      /* Styling untuk pecahan */
+      .fraction {
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        margin: 0 0.2em;
+      }
+      .fraction .top {
+        display: block;
+        padding: 0 0.3em;
+        border-bottom: 1px solid #5e466b;
+      }
+      .fraction .bottom {
+        display: block;
+        padding: 0 0.3em;
+      }
+      
+      /* Feedback styling */
+      .feedback-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .feedback-box {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        animation: popIn 0.5s ease-out;
+      }
+      @keyframes popIn {
+        0% { transform: scale(0.5); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+      .feedback-correct {
+        border: 4px solid #10b981;
+      }
+      .feedback-incorrect {
+        border: 4px solid #ef4444;
+      }
+      .feedback-icon {
+        font-size: 60px;
+        margin-bottom: 20px;
+      }
+      .feedback-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+      .feedback-message {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+      .feedback-button {
+        background: linear-gradient(to right, #8b5cf6, #ec4899);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .feedback-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen flex flex-col">
+    <!-- Animated Stars Background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Navbar -->
+    <nav class="cute-card relative z-10 flex flex-wrap justify-between items-center px-6 sm:px-10 py-4 m-4 rounded-3xl">
+      <div class="fredoka text-2xl sm:text-3xl bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent drop-shadow-sm flex items-center gap-2">
+        <span class="sparkle">✨</span>
+        Kelompok 4
+        <span class="sparkle">✨</span>
+      </div>
+      <div class="flex flex-wrap gap-3 justify-center mt-2 sm:mt-0">
+        <a href="index.html" class="bg-gradient-to-r from-pink-400 to-purple-400 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105">
+          🏠 Dashboard
+        </a>
+        <a href="bilangan.html" class="bg-gradient-to-r from-blue-400 to-cyan-400 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105">
+          🔢 Bilangan
+        </a>
+        <a href="geometri.html" class="bg-gradient-to-r from-green-400 to-teal-400 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105">
+          📐 Geometri
+        </a>
+        <a href="game.html" class="bg-gradient-to-r from-yellow-400 to-orange-400 text-white font-semibold px-5 py-2 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105">
+          🎮 Quiz
+        </a>
+        <a href="evaluasi.html" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold px-5 py-2 rounded-full shadow-lg scale-105">
+          ⭐ Evaluasi
+        </a>
+      </div>
+    </nav>
+
+    <!-- Judul -->
+    <div class="text-center mt-8 relative z-10">
+      <div class="float inline-block">
+        <h1 class="fredoka text-5xl sm:text-6xl mb-2 text-white drop-shadow-lg">
+          🎯 Evaluasi Matematika
+        </h1>
+      </div>
+      <h2 class="text-white text-xl mb-4 font-semibold drop-shadow-md">
+        💖 Pilih Materi yang Ingin Kamu Latih 💖
+      </h2>
+    </div>
+
+    <!-- Menu Pilihan -->
+    <div class="text-center mt-6 relative z-10" id="menu">
+      <div class="flex flex-col sm:flex-row gap-6 justify-center items-center px-4">
+        <button onclick="startQuiz('bilangan')" class="btn-cute cute-card px-12 py-10 rounded-3xl shadow-2xl group">
+          <div class="text-6xl mb-3 group-hover:scale-125 transition-transform">🔢</div>
+          <div class="fredoka text-2xl bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent">
+            Bilangan
+          </div>
+          <p class="text-sm text-gray-600 mt-2">10 Soal Seru!</p>
+        </button>
+        
+        <button onclick="startQuiz('geometri')" class="btn-cute cute-card px-12 py-10 rounded-3xl shadow-2xl group">
+          <div class="text-6xl mb-3 group-hover:scale-125 transition-transform">📐</div>
+          <div class="fredoka text-2xl bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
+            Geometri
+          </div>
+          <p class="text-sm text-gray-600 mt-2">10 Soal Seru!</p>
+        </button>
+      </div>
+    </div>
+
+    <!-- Kontainer Quiz -->
+    <div id="quiz" class="hidden cute-card rounded-3xl shadow-2xl w-[90%] max-w-3xl mx-auto mt-10 mb-10 p-8 relative z-10"></div>
+
+    <!-- Hasil -->
+    <div id="result" class="text-center text-3xl font-bold text-white drop-shadow-lg mt-6 mb-6 relative z-10"></div>
+
+    <!-- Footer -->
+    <footer class="cute-card text-center mt-auto mx-4 mb-4 py-4 rounded-3xl relative z-10">
+      <p class="text-gray-600 text-sm font-semibold">
+        ✨ © 2025 Kelompok 4 | Kelas C2023 - Universitas PGRI Kanjuruhan Malang
+        Belajar dengan hati, berpikir dengan logika, dan beraksi dengan semangat! ✨
+      </p>
+    </footer>
+
+    <script>
+      // Create animated stars
+      const starsContainer = document.getElementById('stars');
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = Math.random() * 3 + 'px';
+        star.style.height = star.style.width;
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        starsContainer.appendChild(star);
+      }
+
+      let imageUrls = {
+        img1: "1-geo.png",
+        img2: "2-geo.png",
+        img3: "3-geo.png",
+        img4: "0.jpeg",
+      };
+
+      function loadImage(imgId) {
+        const input = document.getElementById(imgId);
+        const file = input.files[0];
+        const statusNum = imgId.replace('img', '');
+        const statusEl = document.getElementById('status' + statusNum);
+        
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            imageUrls[imgId] = e.target.result;
+            statusEl.textContent = '✅ Gambar berhasil di-upload!';
+            statusEl.className = 'text-xs text-green-600 font-semibold';
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+      
+      // Fungsi untuk mengubah pecahan menjadi format yang benar
+      function formatFraction(text) {
+        // Mengganti pecahan dalam format a/b menjadi format HTML yang benar
+        return text.replace(/(\d+)\/(\d+)/g, '<span class="fraction"><span class="top">$1</span><span class="bottom">$2</span></span>');
+      }
+
+      const soalBilangan = [
+        {
+          q: "1. Hasil dari 17/50 + 23/50 adalah …",
+          a: ["2/10", "4/50", "4/5", "1/5"],
+          correct: "4/5"
+        },
+        {
+          q: "2. Hasil dari 9/12 + 4/48 adalah …",
+          a: ["4/6", "5/6", "30/48", "20/48"],
+          correct: "5/6"
+        },
+        {
+          
+          q: "3. Perhatikan gambar timbangan adonan kue! Berapa jumlah kedua adonan tersebut…",
+          img: "img4",
+          a: ["0,76", "0,67", "0,66", "1,65"],
+          correct: "0,67"
+        },
+        {
+          q: "4. 18/25 – 0,15 = …",
+          a: ["55/100", "56/100", "57/100", "1"],
+          correct: "57/100"
+        },
+        {
+          q: "5. Hasil dari 1,5 - 2/5 adalah …",
+          a: ["11/10", "10/11", "1/10", "5/10"],
+          correct: "11/10"
+        },
+        {
+          q: "6. Ibu memiliki 3/4 liter minyak goreng dan menambah 0,25 liter lagi. Berapa liter minyak goreng sekarang?",
+          a: ["0,5 liter", "0,75 liter", "1 liter", "1,25 liter"],
+          correct: "1 liter"
+        },
+        {
+          q: "7. Sebuah bak berisi 0,8 m³ air. Jika ditambahkan 1/5 m³ lagi, maka jumlah air seluruhnya adalah …",
+          a: ["0,9 m³", "1 m³", "1,1 m³", "1,2 m³"],
+          correct: "1 m³"
+        },
+        {
+          q: "8. Nina berjalan menuju rumah temannya sejauh 4 km. Setelah berjalan 2,5 km, ia beristirahat di warung. Berapa kilometer lagi jarak yang harus ditempuh Nina agar sampai di rumah temannya?",
+          a: ["1,2 km", "1,4 km", "1,5 km", "1,6 km"],
+          correct: "1,5 km"
+        },
+        {
+          q: "9. Lani memiliki 5/6 meter pita, ia menggunakan 1/3 meter untuk menghias kado. Berapa meter pita yang tersisa?",
+          a: ["3/6", "1/3", "1/4", "1/6"],
+          correct: "3/6"
+        },
+        {
+          q: "10. Siti memiliki 1,5 meter kain. Ia menggunakan 0,75 meter untuk membuat baju dan 1/4 meter untuk hiasan. Berapa meter kain yang tersisa?",
+          a: ["0,25 meter", "0,4 meter", "0,5 meter", "0,6 meter"],
+          correct: "0,5 meter"
+        }
+      ];
+
+      const soalGeometri = [
+        { q: "1. Gelas tanpa tutup memiliki jari-jari alas 10 cm. Hitunglah luas permukaan bagian luar gelas! (π = 3,14)", a: ["1.256 cm²", "1.265 cm²", "2.256 cm²", "1.56 cm²"], correct: "1.256 cm²", img: "img1" },
+        { q: "2. Tong tanpa tutup memiliki luas permukaan 942 cm². Tentukan tinggi wadah tersebut! (π = 3,14)", a: ["20 cm", "10 cm", "50 cm", "30 cm"], correct: "10 cm", img: "img2" },
+        { q: "3. Kaleng susu memiliki jari-jari 7 cm dan tinggi 14 cm. Hitunglah volume kaleng susu tersebut! (π = 22/7)", a: ["2.146 cm³", "2.176 cm³", "2.156 cm³", "3.166 cm³"], correct: "2.156 cm³", img: "img3" },
+        { q: "4. Wadah logam tertutup berbentuk tabung. Volume 9.420 cm³, jari-jari 10 cm. Hitunglah tingginya! (π = 3,14)", a: ["30 cm", "20 cm", "10 cm", "50 cm"], correct: "30 cm" },
+        { q: "5. Gelas memiliki volume 942 cm³, jari-jari 5 cm. Tentukan tinggi gelas tersebut! (π = 3,14)", a: ["12 cm", "13 cm", "14 cm", "15 cm"], correct: "12 cm" },
+        { q: "6. Tempat beras berbentuk tabung dengan r=7 cm, t=14 cm. Hitunglah volumenya! (π = 22/7)", a: ["3.146 cm³", "2.056 cm³", "2.956 cm³", "2.156 cm³"], correct: "2.156 cm³" },
+        { q: "7. Drum air tertutup memiliki diameter 28 cm dan tinggi 20 cm. Hitunglah volume maksimumnya! (π = 22/7)", a: ["11.320 cm³", "12.220 cm³", "12.320 cm³", "10.320 cm³"], correct: "12.320 cm³" },
+        { q: "8. Tangki air berbentuk tabung tertutup dengan diameter 20 cm dan tinggi 20 cm. Berapa volume maksimumnya? (π = 3,14)", a: ["6.880 cm³", "6.280 cm³", "6.290 cm³", "6.200 cm³"], correct: "6.280 cm³" },
+        { q: "9. Kaleng cat tanpa tutup berbentuk tabung. Jari-jari 8 cm, tinggi 20 cm. Hitunglah luas bagian luarnya! (π = 3,14)", a: ["1.005,76 cm²", "1.105,76 cm²", "1.205,76 cm²", "1.305,76 cm²"], correct: "1.205,76 cm²" },
+        { q: "10. Wadah logam tertutup volume 1.570 cm³, jari-jari 5 cm. Tentukan tingginya! (π = 3,14)", a: ["20 cm", "12 cm", "32 cm", "2 cm"], correct: "20 cm" },
+      ];
+
+      let activeQuiz = [];
+      let current = 0;
+      let score = 0;
+
+      function startQuiz(type) {
+        document.getElementById("menu").classList.add("hidden");
+        document.getElementById("quiz").classList.remove("hidden");
+        document.getElementById("result").innerHTML = "";
+        current = 0;
+        score = 0;
+        activeQuiz = type === "bilangan" ? soalBilangan : soalGeometri;
+        showQuestion();
+      }
+
+      function showQuestion() {
+        const quiz = document.getElementById("quiz");
+        if (current < activeQuiz.length) {
+          const q = activeQuiz[current];
+          const progress = ((current / activeQuiz.length) * 100).toFixed(0);
+          const imageHtml = q.img && imageUrls[q.img] ? 
+            `<div class="mb-6 flex justify-center"><img src="${imageUrls[q.img]}" alt="Gambar Soal" class="max-w-full max-h-64 rounded-xl shadow-lg border-4 border-purple-200"></div>` : '';
+          
+          // Format pertanyaan dan pilihan jawaban dengan pecahan yang benar
+          const formattedQuestion = formatFraction(q.q);
+          const formattedAnswers = q.a.map(opt => formatFraction(opt));
+          
+          quiz.innerHTML = `
+            <div class="mb-4">
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-sm font-semibold text-purple-600">Soal ${current + 1}/${activeQuiz.length}</span>
+                <span class="text-sm font-semibold text-purple-600">Skor: ${score}</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-3 mb-6">
+                <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full transition-all duration-500" style="width: ${progress}%"></div>
+              </div>
+              ${imageHtml}
+              <h3 class="fredoka text-2xl mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">${formattedQuestion}</h3>
+              <div class="space-y-3">
+                ${formattedAnswers.map((opt, idx) => `
+                  <div class="quiz-option bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 px-5 py-4 rounded-2xl cursor-pointer transition-all">
+                    <label class="flex items-center cursor-pointer">
+                      <input type="radio" name="q" value="${q.a[idx]}" class="mr-3 w-5 h-5 accent-purple-500">
+                      <span class="font-semibold text-gray-700">${opt}</span>
+                    </label>
+                  </div>
+                `).join("")}
+              </div>
+              <button onclick="checkAnswer()" class="btn-cute w-full mt-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold px-6 py-4 rounded-2xl shadow-lg text-lg">
+                ✨ Cek Jawaban ✨
+              </button>
+            </div>
+          `;
+        } else {
+          showScore();
+        }
+      }
+
+      function showFeedback(isCorrect, correctAnswer) {
+        const feedbackContainer = document.createElement('div');
+        feedbackContainer.className = 'feedback-container';
+        
+        const feedbackClass = isCorrect ? 'feedback-correct' : 'feedback-incorrect';
+        const feedbackIcon = isCorrect ? '🎉' : '💭';
+        const feedbackTitle = isCorrect ? 'Benar Sekali!' : 'Kurang Tepat Ya~';
+        const feedbackMessage = isCorrect 
+          ? 'Kamu hebat! Lanjutkan ke soal berikutnya.' 
+          : `Jawaban benar: ${formatFraction(correctAnswer)} ✨`;
+        
+        feedbackContainer.innerHTML = `
+          <div class="feedback-box ${feedbackClass}">
+            <div class="feedback-icon">${feedbackIcon}</div>
+            <div class="feedback-title">${feedbackTitle}</div>
+            <div class="feedback-message">${feedbackMessage}</div>
+            <button class="feedback-button" onclick="closeFeedback()">Lanjutkan</button>
+          </div>
+        `;
+        
+        document.body.appendChild(feedbackContainer);
+      }
+
+      function closeFeedback() {
+        const feedbackContainer = document.querySelector('.feedback-container');
+        if (feedbackContainer) {
+          feedbackContainer.remove();
+        }
+        current++;
+        showQuestion();
+      }
+
+      function checkAnswer() {
+        const selected = document.querySelector('input[name="q"]:checked');
+        if (!selected) {
+          showFeedback(false, "Pilih jawaban dulu ya 🥰");
+          return;
+        }
+        
+        // Format jawaban yang dipilih dan jawaban benar untuk perbandingan
+        const selectedValue = selected.value;
+        const correctValue = activeQuiz[current].correct;
+        
+        // Untuk soal bilangan, kita perlu membandingkan pecahan dalam bentuk yang sama
+        if (activeQuiz === soalBilangan) {
+          // Fungsi untuk menormalisasi pecahan
+          const normalizeFraction = (fraction) => {
+            // Jika pecahan dalam bentuk a/b, ubah ke desimal
+            if (fraction.includes('/')) {
+              const parts = fraction.split('/');
+              return parseFloat(parts[0]) / parseFloat(parts[1]);
+            }
+            // Jika sudah dalam bentuk desimal, langsung parse
+            return parseFloat(fraction);
+          };
+          
+          // Normalisasi kedua nilai
+          const selectedNormalized = normalizeFraction(selectedValue);
+          const correctNormalized = normalizeFraction(correctValue);
+          
+          // Bandingkan dengan toleransi kecil untuk kesalahan floating point
+          if (Math.abs(selectedNormalized - correctNormalized) < 0.0001) {
+            showFeedback(true, correctValue);
+            score += 10;
+          } else {
+            showFeedback(false, correctValue);
+          }
+        } else {
+          // Untuk soal geometri, bandingkan langsung
+          if (selectedValue === correctValue) {
+            showFeedback(true, correctValue);
+            score += 10;
+          } else {
+            showFeedback(false, correctValue);
+          }
+        }
+      }
+
+      function showScore() {
+        const total = activeQuiz.length * 10;
+        const percentage = (score / total) * 100;
+        let emoji = percentage >= 80 ? "🏆" : percentage >= 60 ? "🌟" : "💪";
+        let message = percentage >= 80 ? "Luar Biasa!" : percentage >= 60 ? "Bagus Sekali!" : "Terus Semangat!";
+        
+        document.getElementById("quiz").innerHTML = `
+          <div class="text-center py-8">
+            <div class="text-8xl mb-4 animate-bounce">${emoji}</div>
+            <h2 class="fredoka text-4xl mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              ${message}
+            </h2>
+            <p class="text-5xl font-bold text-gray-700 mb-2">${score} / ${total}</p>
+            <p class="text-2xl text-gray-600 mb-6">${percentage.toFixed(0)}%</p>
+            <button onclick="location.reload()" class="btn-cute bg-gradient-to-r from-green-400 to-blue-400 hover:from-green-500 hover:to-blue-500 text-white font-bold px-8 py-4 rounded-2xl shadow-lg text-lg">
+              🔄 Coba Lagi
+            </button>
+          </div>
+        `;
+      }
+    </script>
+  </body>
+</html>
